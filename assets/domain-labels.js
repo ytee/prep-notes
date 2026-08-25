@@ -13,9 +13,12 @@
   }
 
   function applyDomainLabels() {
-    const aerospace = activeModuleId() === 'aerospace';
+    const activeModule = activeModuleId();
+    const aerospace = activeModule === 'aerospace';
+    const semiconductor = activeModule === 'semiconductor';
     const exampleLabel = $('#conceptDetail .concept-example .eyebrow');
-    setTextIfChanged(exampleLabel, aerospace ? 'AEROSPACE EXAMPLE' : 'AUTOMOTIVE EXAMPLE');
+    const label = aerospace ? 'AEROSPACE EXAMPLE' : semiconductor ? 'SILICON EXAMPLE' : 'AUTOMOTIVE EXAMPLE';
+    setTextIfChanged(exampleLabel, label);
 
     if (aerospace) {
       $('#conceptDetail')?.querySelectorAll('.concept-tags span, .concept-references p').forEach(element => {

@@ -127,6 +127,51 @@ function validateAerospaceMix(questions) {
   console.log('aerospace: foundation, difficult technical, certification, audit and leadership mix passed');
 }
 
+function validateSemiconductorMix(questions) {
+  const requiredKinds = new Set([
+    'Technical management',
+    'Certification scenario',
+    'Customer integration scenario',
+    'Engineering lead scenario'
+  ]);
+
+  for (let stage = 1; stage <= 10; stage += 1) {
+    const items = questions.filter(question => question.day === stage);
+    const foundationCount = items.filter(question => question.tier === 'Foundation').length;
+    const toughCount = items.filter(question => ['Advanced', 'Expert'].includes(question.tier)).length;
+    if (foundationCount < 2) fail(`semiconductor: stage ${stage} needs at least two foundation exercises`);
+    if (toughCount < 7) fail(`semiconductor: stage ${stage} needs at least seven advanced/expert exercises`);
+
+    for (const kind of requiredKinds) {
+      if (!items.some(question => question.kind === kind)) {
+        fail(`semiconductor: stage ${stage} is missing ${kind}`);
+      }
+    }
+  }
+
+  const roleTrackCount = questions.filter(question => question.tracks.includes('Role Scenarios')).length;
+  if (roleTrackCount < 40) fail('semiconductor: expected at least 40 role-based exercises');
+
+  const requiredCoverage = [
+    'Semiconductor FuSa Foundations',
+    'Digital Design',
+    'Design Flow & Lifecycle',
+    'RTL Verification',
+    'Fault Injection & Analysis',
+    'Lockstep & Redundancy',
+    'Hardware Safety Metrics',
+    'SEooC & Safety Manuals',
+    'Standards Landscape',
+    'Certification & Leadership'
+  ];
+  const representedTracks = new Set(questions.flatMap(question => question.tracks));
+  for (const track of requiredCoverage) {
+    if (!representedTracks.has(track)) fail(`semiconductor: required coverage track is missing: ${track}`);
+  }
+
+  console.log('semiconductor: foundation, difficult technical, certification and leadership mix passed');
+}
+
 function validateLearningModel(topicId, content) {
   const normalized = learningLanguage.normalize(content);
   const findings = learningLanguage.findProhibited(normalized);
@@ -246,6 +291,7 @@ for (const topic of manifest.topics) {
   validateQuestions(topic.id, content.days, content.tracks, questions);
   if (topic.id === 'embedded') validateEmbeddedMix(questions);
   if (topic.id === 'aerospace') validateAerospaceMix(questions);
+  if (topic.id === 'semiconductor') validateSemiconductorMix(questions);
 
   if (!topic.legacyGlobal) {
     const declaredTracks = new Set(content.tracks.map(track => track.name));
@@ -265,7 +311,7 @@ for (const topic of manifest.topics) {
   validateLearningModel(topic.id, { ...content, questions });
 
   if (topic.concepts) {
-    const expectedCounts = { safety: 23, embedded: 10, aerospace: 10 };
+    const expectedCounts = { safety: 23, embedded: 10, aerospace: 10, semiconductor: 10 };
     const expectedCount = expectedCounts[topic.id];
     if (!expectedCount) fail(`${topic.id}: concept count expectation is not configured`);
     validateConceptRuntime(

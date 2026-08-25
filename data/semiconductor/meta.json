@@ -1,0 +1,363 @@
+{
+  "schemaVersion": 1,
+  "id": "semiconductor",
+  "title": "Semiconductor & Silicon Functional Safety",
+  "shortTitle": "Semiconductor",
+  "eyebrow": "SILICON FUNCTIONAL SAFETY",
+  "subtitle": "RTL \u00d7 Verification \u00d7 Lockstep & Redundancy \u00d7 Hardware Metrics \u00d7 Certification Leadership",
+  "description": "A rigorous learning route for functional safety at the semiconductor and silicon IP level, from element-level foundations and digital design through RTL verification, fault injection, lockstep and redundant architectures, hardware safety metrics, Safety Element out of Context authoring, the wider standards landscape and certification-ready technical leadership.",
+  "methodTitle": "Learn the silicon layer, verify the safety mechanism, then defend the metric and the safety case",
+  "methodSteps": [
+    "Study the stage concept and identify the semiconductor-specific inputs, activities and evidence it produces.",
+    "Answer foundation questions precisely before working difficult RTL, verification and hardware-metric scenarios.",
+    "Treat FMEDA, fault-injection results and safety-manual claims as one connected, traceable evidence chain rather than standalone numbers.",
+    "Make technical-management, certification and customer-integration decisions using explicit assumptions and residual gaps."
+  ],
+  "caseStudy": {
+    "title": "A Lockstep CPU Core for Multiple Automotive Customers",
+    "description": "A semiconductor IP vendor develops a dual-core lockstep CPU as a Safety Element out of Context intended for ASIL D braking and steering applications across several OEM and Tier-1 customers, from RTL through tapeout, characterization and multi-customer safety-manual support."
+  },
+  "notice": "Employer-neutral learning material. Coverage draws on public functional-safety, verification and semiconductor-industry practice. Licensed standards, foundry data and customer-approved safety cases remain authoritative.",
+  "referenceLabel": "Semiconductor safety reference map",
+  "matrixTitle": "Semiconductor Design Flow and Safety Evidence Matrix",
+  "matrixHeaders": [
+    "Design-flow domain",
+    "Primary responsibility",
+    "Critical interfaces",
+    "Advanced learning outcome"
+  ],
+  "matrix": [
+    [
+      "Element foundations",
+      "Define element boundary, assumed ASIL and Assumptions of Use",
+      "Item integrators, standards, product management",
+      "Defend why an assumed-context safety claim is traceable rather than asserted."
+    ],
+    [
+      "Digital design",
+      "Manage clock domains, synthesis equivalence and DFT/diagnostic overlap",
+      "RTL designers, DFT engineers, physical design",
+      "Show that a safety mechanism's gate-level behavior, not just its RTL description, is evidenced."
+    ],
+    [
+      "Design flow & lifecycle",
+      "Sequence safety reviews against tapeout and configuration baselines",
+      "Program management, physical design, customers",
+      "Protect pre-tapeout safety gates under fixed start-of-production pressure."
+    ],
+    [
+      "RTL verification",
+      "Separate functional verification from safety-mechanism verification",
+      "Verification engineers, formal-methods tools",
+      "Distinguish a design that works from a safety mechanism proven to detect and react to a fault."
+    ],
+    [
+      "Fault injection & analysis",
+      "Build and substantiate IP-block FMEDA with fault-injection evidence",
+      "Verification, silicon reliability, foundry data",
+      "Reconcile analytical diagnostic-coverage estimates with empirical campaign results."
+    ],
+    [
+      "Lockstep & redundancy",
+      "Select and verify redundant diagnostic architectures",
+      "Core architects, clock/power design, DFT",
+      "Justify independence claims for shared clock and power resources, not just assume them."
+    ],
+    [
+      "Hardware safety metrics",
+      "Derive and publish SPFM/LFM/PMHF with traceable assumptions",
+      "Reliability engineering, customer safety teams",
+      "Make a published metric reproducible years after the original derivation."
+    ],
+    [
+      "SEooC & safety manuals",
+      "Author falsifiable Assumptions of Use and integrator-usable safety manuals",
+      "Product management, multiple customer programs",
+      "Write producer-side evidence someone else must verify, not just consumer-side evidence you verify yourself."
+    ],
+    [
+      "Standards landscape",
+      "Reconcile ISO 26262, IEC 61508, ISO/SAE 21434 and ASPICE HWE",
+      "Cybersecurity, quality, process assessors",
+      "Resolve safety/security seams like secure boot through joint review rather than unilateral ownership."
+    ],
+    [
+      "Certification & leadership",
+      "Package, defend and lead a semiconductor safety case to assessment",
+      "Assessors, customers, cross-site engineering teams",
+      "Design an end-to-end safety approach for a new IP program from inception, not retrofit it before assessment."
+    ]
+  ],
+  "focusTitle": "Semiconductor & Silicon Functional Safety coverage map",
+  "focusHeaders": [
+    "Learning track",
+    "Stages",
+    "Coverage"
+  ],
+  "focusMap": [
+    [
+      "Semiconductor FuSa Foundations",
+      "1",
+      "Semiconductor Functional Safety Foundations"
+    ],
+    [
+      "Digital Design",
+      "2",
+      "Digital Design Fundamentals for Safety Engineers"
+    ],
+    [
+      "Design Flow & Lifecycle",
+      "3",
+      "The Semiconductor Design and Safety Lifecycle"
+    ],
+    [
+      "RTL Verification",
+      "4",
+      "RTL Verification Strategy"
+    ],
+    [
+      "Fault Injection & Analysis",
+      "5",
+      "Fault Injection and Silicon-Level Safety Analysis"
+    ],
+    [
+      "Lockstep & Redundancy",
+      "6",
+      "Lockstep, Redundancy and Diagnostic Hardware Architectures"
+    ],
+    [
+      "Hardware Safety Metrics",
+      "7",
+      "Hardware Safety Metrics for IP and SoC"
+    ],
+    [
+      "SEooC & Safety Manuals",
+      "8",
+      "Safety Element out of Context: the Producer's Side"
+    ],
+    [
+      "Standards Landscape",
+      "9",
+      "Standards Landscape: IEC 61508, ISO/SAE 21434 and ASPICE"
+    ],
+    [
+      "Certification & Leadership",
+      "10",
+      "Certification, Assessment and Technical Leadership"
+    ]
+  ],
+  "focusNote": "The route teaches original engineering explanations and scenarios. It does not reproduce normative standard clauses, foundry data or proprietary certification material.",
+  "knowledgeCheckTitle": "Semiconductor functional safety knowledge check and certification exercise",
+  "architectureExercise": {
+    "title": "45-minute lockstep IP safety-case exercise",
+    "prompt": "Design and defend the end-to-end functional safety approach for a new dual-core lockstep CPU IP core intended for ASIL D automotive use across multiple customers, from element boundary through RTL, verification, hardware metrics and safety-manual support.",
+    "structure": [
+      "Define the element boundary, assumed ASIL and Assumptions of Use.",
+      "Select and justify the redundancy architecture (lockstep, delayed lockstep or TMR) against latency/area/power constraints.",
+      "Plan separate functional and safety-mechanism verification, including formal properties for the comparator.",
+      "Build the FMEDA and fault-injection plan, and derive SPFM/LFM/PMHF with stated assumptions.",
+      "Author the safety manual and AoU for multiple customer configurations.",
+      "Define the pre-tapeout review gates and the certification-support plan."
+    ],
+    "challenges": [
+      "The comparator itself has no independent self-check in the initial design.",
+      "Two customers propose conflicting interpretations of the same Assumptions of Use.",
+      "A physical-design deadline threatens to compress the pre-tapeout safety review.",
+      "An assessor finds the evidence technically complete but scattered across disconnected repositories."
+    ]
+  },
+  "days": [
+    {
+      "day": 1,
+      "title": "Semiconductor Functional Safety Foundations",
+      "focus": "Element vs. item development, SEooC, assumed ASIL, and why silicon-level evidence has to be traceable by name.",
+      "deliverable": "Write the element boundary and Assumptions of Use for one silicon safety mechanism.",
+      "target": "45-55 min"
+    },
+    {
+      "day": 2,
+      "title": "Digital Design Fundamentals for Safety Engineers",
+      "focus": "Combinational/sequential logic, clock-domain crossings, synthesis, and DFT's dual role as test and diagnostic infrastructure.",
+      "deliverable": "Review a synchronizer and a DFT/diagnostic overlap for one safety-relevant path.",
+      "target": "45-55 min"
+    },
+    {
+      "day": 3,
+      "title": "The Semiconductor Design and Safety Lifecycle",
+      "focus": "Spec-to-production design flow, tapeout as an irreversible gate, and configuration management under a fixed SOP date.",
+      "deliverable": "Map safety work products and review gates across a design-flow schedule.",
+      "target": "45-55 min"
+    },
+    {
+      "day": 4,
+      "title": "RTL Verification Strategy",
+      "focus": "Simulation, formal verification and emulation; functional coverage versus safety-mechanism verification.",
+      "deliverable": "Design a verification strategy that separately evidences function and fault detection for one mechanism.",
+      "target": "50-60 min"
+    },
+    {
+      "day": 5,
+      "title": "Fault Injection and Silicon-Level Safety Analysis",
+      "focus": "Gate-level fault models, IP-block FMEDA, and fault-injection campaigns that substantiate coverage claims.",
+      "deliverable": "Build a mini FMEDA and fault-injection plan for one safety mechanism.",
+      "target": "50-60 min"
+    },
+    {
+      "day": 6,
+      "title": "Lockstep, Redundancy and Diagnostic Hardware Architectures",
+      "focus": "Lockstep, delayed lockstep, TMR, comparator self-check, and independence under shared clock/power.",
+      "deliverable": "Select and justify a redundancy architecture against a stated latency/area/power constraint.",
+      "target": "50-60 min"
+    },
+    {
+      "day": 7,
+      "title": "Hardware Safety Metrics for IP and SoC",
+      "focus": "SPFM/LFM/PMHF from the producer's side, base failure rate sourcing, and sensitivity analysis.",
+      "deliverable": "Produce a metric sensitivity table across a test-interval assumption range.",
+      "target": "50-60 min"
+    },
+    {
+      "day": 8,
+      "title": "Safety Element out of Context: the Producer's Side",
+      "focus": "Authoring Assumptions of Use and a safety manual from the producer's side, and the assumed-ASIL business risk.",
+      "deliverable": "Draft AoU entries and a safety-manual outline for a multi-customer IP block.",
+      "target": "45-55 min"
+    },
+    {
+      "day": 9,
+      "title": "Standards Landscape: IEC 61508, ISO/SAE 21434 and ASPICE",
+      "focus": "ISO 26262's IEC 61508 lineage, ISO/SAE 21434 TARA versus HARA, and ASPICE HWE process capability.",
+      "deliverable": "Analyze a safety/security seam (e.g. secure boot) and its joint review requirement.",
+      "target": "45-55 min"
+    },
+    {
+      "day": 10,
+      "title": "Certification, Assessment and Technical Leadership",
+      "focus": "Assessment types, safety-case packaging, multi-audience defense, and end-to-end technical leadership.",
+      "deliverable": "Present a 15-minute safety-case argument and end-to-end approach for a new lockstep IP core.",
+      "target": "55-60 min"
+    }
+  ],
+  "tracks": [
+    {
+      "name": "Semiconductor FuSa Foundations",
+      "desc": "Element vs. item development, SEooC, assumed ASIL and Assumptions of Use.",
+      "iso": "ISO 26262-11 learning reference"
+    },
+    {
+      "name": "Digital Design",
+      "desc": "Combinational/sequential logic, clock domains, synthesis and DFT/diagnostic overlap.",
+      "iso": "Digital design fundamentals"
+    },
+    {
+      "name": "Design Flow & Lifecycle",
+      "desc": "Specification-to-production design flow, tapeout gating and configuration management.",
+      "iso": "ISO 26262-8 configuration management"
+    },
+    {
+      "name": "RTL Verification",
+      "desc": "Simulation, formal verification, emulation and safety-mechanism verification.",
+      "iso": "ISO 26262-8 verification"
+    },
+    {
+      "name": "Fault Injection & Analysis",
+      "desc": "Gate-level fault models, IP-block FMEDA and fault-injection campaigns.",
+      "iso": "ISO 26262-5 hardware architectural metrics"
+    },
+    {
+      "name": "Lockstep & Redundancy",
+      "desc": "Lockstep, delayed lockstep, TMR, comparator self-check and independence analysis.",
+      "iso": "ISO 26262-5 / ISO 26262-9 dependent failure analysis"
+    },
+    {
+      "name": "Hardware Safety Metrics",
+      "desc": "SPFM/LFM/PMHF derivation, base failure rate sourcing and sensitivity analysis.",
+      "iso": "ISO 26262-5 hardware architectural metrics"
+    },
+    {
+      "name": "SEooC & Safety Manuals",
+      "desc": "Assumptions of Use and safety-manual authoring from the producer's side.",
+      "iso": "ISO 26262-10 / ISO 26262-11"
+    },
+    {
+      "name": "Standards Landscape",
+      "desc": "IEC 61508 lineage, ISO/SAE 21434 TARA and ASPICE hardware-engineering process capability.",
+      "iso": "IEC 61508 / ISO/SAE 21434 / Automotive SPICE PAM"
+    },
+    {
+      "name": "Certification & Leadership",
+      "desc": "Confirmation reviews, audits, assessments, safety-case defense and technical leadership.",
+      "iso": "ISO 26262-2 safety management"
+    },
+    {
+      "name": "Role Scenarios",
+      "desc": "Technical-management, certification, customer-integration and engineering-lead decisions.",
+      "iso": "ISO 26262-2 safety management"
+    }
+  ],
+  "quiz": [
+    {
+      "q": "A supplier calls their IP core \u201cASIL D ready.\u201d What single piece of missing evidence should make you most skeptical of the claim?",
+      "options": [
+        "A marketing brochure describing the core's performance",
+        "A safety manual and Assumptions of Use that trace the claim to a defined FMEDA and metrics",
+        "A press release announcing automotive design wins",
+        "A roadmap slide showing future process-node support"
+      ],
+      "answer": 1,
+      "why": "An ASIL claim is only as credible as the traceable safety plan, FMEDA, metrics and Assumptions of Use behind it; without that chain it is an assertion, not evidence."
+    },
+    {
+      "q": "A safety mechanism shows 100% code coverage in RTL simulation. What does this actually confirm?",
+      "options": [
+        "That the safety mechanism correctly detects and reacts to every fault it claims to cover",
+        "That every line or branch of the mechanism's RTL executed during testing, independent of whether its fault-detecting behavior was exercised",
+        "That the mechanism is synthesis-clean and timing-closed",
+        "That the mechanism's diagnostic coverage meets its SPFM/LFM target"
+      ],
+      "answer": 1,
+      "why": "Code coverage measures execution, not correctness under fault conditions; a mechanism can be fully exercised functionally while its fault-detecting path is never actually triggered by any test."
+    },
+    {
+      "q": "Two lockstep cores share a single clock tree and power rail. What can be claimed about their independence without further analysis?",
+      "options": [
+        "Full independence, since lockstep itself guarantees redundancy",
+        "Independence from each core's own internal logic faults, but not from a shared clock-glitch or supply-droop event",
+        "No independence at all under any circumstance",
+        "Independence is irrelevant once a comparator is present"
+      ],
+      "answer": 1,
+      "why": "Shared clock and power are common-cause failure sources that lockstep alone does not address; a dependent-failure analysis or mitigation such as delayed lockstep is needed before that specific independence claim is credible."
+    }
+  ],
+  "references": [
+    {
+      "name": "ISO 26262-11:2018",
+      "note": "Guidelines on application of ISO 26262 to semiconductors; primary reference for this module's element-level and RTL-adjacent content."
+    },
+    {
+      "name": "ISO 26262-5:2018",
+      "note": "Hardware development at the product level; hardware architectural metrics (SPFM, LFM, PMHF) and FMEDA context."
+    },
+    {
+      "name": "ISO 26262-8:2018 / ISO 26262-10:2018",
+      "note": "Supporting processes (configuration management, tool confidence, verification) and the ISO 26262-10 guideline volume, including SEooC guidance."
+    },
+    {
+      "name": "IEC 61508:2010",
+      "note": "Base functional-safety standard; structural and lifecycle ancestor of ISO 26262."
+    },
+    {
+      "name": "ISO/SAE 21434:2021",
+      "note": "Road vehicle cybersecurity engineering; TARA process referenced for safety/security seam scenarios."
+    },
+    {
+      "name": "Automotive SPICE Process Assessment Model",
+      "note": "Referenced for the ASPICE hardware-engineering (HWE) process-capability context."
+    },
+    {
+      "name": "Programme-approved semiconductor safety plans, foundry reliability data and customer safety cases",
+      "note": "Authoritative project-specific evidence; this module provides original learning explanations, not a substitute."
+    }
+  ]
+}

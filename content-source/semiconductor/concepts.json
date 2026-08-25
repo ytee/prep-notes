@@ -1,0 +1,868 @@
+{
+  "schemaVersion": 1,
+  "module": "semiconductor",
+  "collection": {
+    "id": "semiconductor-silicon-functional-safety",
+    "title": "Semiconductor & Silicon Functional Safety"
+  },
+  "standardBaseline": {
+    "family": "ISO 26262-11 semiconductor guidance with IEC 61508 baseline",
+    "edition": "ISO 26262-11:2018 with IEC 61508:2010 baseline",
+    "status": "learning-baseline"
+  },
+  "generatedFrom": "content-source/semiconductor/concepts.json",
+  "concepts": [
+    {
+      "id": "semi-foundations",
+      "title": "Semiconductor Functional Safety Foundations",
+      "module": "semiconductor",
+      "collection": "semiconductor-silicon-functional-safety",
+      "order": 1,
+      "standard": {
+        "family": "ISO 26262-11 semiconductor guidance with IEC 61508 baseline",
+        "edition": "ISO 26262-11:2018 with IEC 61508:2010 baseline",
+        "parts": [
+          "11"
+        ],
+        "clauseRefs": [
+          "ISO 26262-11 semiconductor guidance"
+        ]
+      },
+      "difficulty": "Foundation",
+      "stage": 1,
+      "systems": [
+        "Semiconductor FuSa Foundations",
+        "Standards Landscape"
+      ],
+      "summary": "Semiconductor functional safety develops a hardware or software element for an unknown vehicle context, using assumed safety requirements and assumed use, then hands the resulting safety manual and evidence to an integrator who has never seen the element's internal design.",
+      "learningObjectives": [
+        "Distinguish item-level development (ISO 26262-2/-8) from element-level development of a semiconductor Safety Element out of Context (SEooC).",
+        "Explain what ISO 26262-11 adds beyond Part 5 hardware development for semiconductor-specific concerns.",
+        "Identify the evidence a semiconductor supplier must produce before an ASIL claim is credible."
+      ],
+      "explanation": [
+        "A vehicle-level item has a known system, known operating environment and a HARA that derives safety goals directly. A semiconductor element usually has none of that: it is developed against assumed safety requirements, an assumed ASIL and an Assumptions of Use (AoU) statement, then integrated into item contexts the original design team never sees. This inversion \u2014 designing safety mechanisms before knowing the exact hazard they will ultimately mitigate \u2014 is the central discipline of semiconductor functional safety.",
+        "ISO 26262-11 does not replace Part 5's hardware development process; it interprets it for concerns specific to integrated circuits: reuse across process nodes and product families, systematic capability of hand-written versus generated RTL, DFT and manufacturing test interactions with functional safety diagnostics, and the scale at which a single defect class can appear across millions of instantiated gates. A safety engineer moving from vehicle-level FSM into this space is applying the same governance discipline to a much longer, more irreversible, and more anonymous supply chain.",
+        "'ASIL D ready' is a marketing phrase, not an engineering claim, until it is backed by a safety plan, safety case, FMEDA, safety manual and Assumptions of Use that a reviewer can actually trace. The foundational skill in this module is learning to ask for that evidence chain by name, the same way a functional safety manager already asks for it at the vehicle level."
+      ],
+      "whyItMatters": [
+        "Every downstream safety claim in a vehicle program ultimately rests on assumptions made at the silicon level; a gap here propagates upward invisibly.",
+        "Semiconductor lead times and tapeout costs make late-discovered safety gaps far more expensive to fix than an equivalent software gap."
+      ],
+      "inputs": [
+        "Assumed ASIL and assumed safety requirements",
+        "Target process node and package",
+        "Reuse and legacy IP inventory",
+        "Customer and market segment assumptions"
+      ],
+      "activities": [
+        "Define the element boundary and assumed context of use",
+        "Draft Assumptions of Use and target ASIL",
+        "Plan safety work products across the design flow",
+        "Assess and qualify reused or legacy logic"
+      ],
+      "outputs": [
+        "Semiconductor safety plan",
+        "Element boundary and AoU definition",
+        "Reuse qualification rationale",
+        "Safety work-product plan mapped to design milestones"
+      ],
+      "automotiveExample": "A CPU core IP team is asked to support ASIL D lockstep operation for a customer that has not yet been named. They draft AoU covering external voltage and clock monitoring, publish an assumed safety requirement set, and structure the design and verification plan so the eventual customer's safety case can cite specific, falsifiable claims rather than a generic marketing statement.",
+      "commonMistakes": [
+        "Treating an ASIL claim as a certificate rather than a traceable evidence chain",
+        "Reusing legacy RTL without documenting or re-assessing its systematic capability",
+        "Confusing item-level and element-level responsibility boundaries",
+        "Starting design before assumed safety requirements are written down"
+      ],
+      "relatedConcepts": [
+        "semi-seeoc-producer",
+        "semi-design-lifecycle",
+        "semi-standards-landscape"
+      ],
+      "linkedQuestions": [
+        "S01-01",
+        "S01-02",
+        "S01-03",
+        "S01-04",
+        "S01-05",
+        "S01-06",
+        "S01-07",
+        "S01-08",
+        "S01-09",
+        "S01-10"
+      ],
+      "references": [
+        "ISO 26262-11:2018",
+        "ISO 26262-8:2018",
+        "ISO 26262-10:2018"
+      ],
+      "source": "content-source/semiconductor/concepts.json#semi-foundations"
+    },
+    {
+      "id": "semi-digital-design-fundamentals",
+      "title": "Digital Design Fundamentals for Safety Engineers",
+      "module": "semiconductor",
+      "collection": "semiconductor-silicon-functional-safety",
+      "order": 2,
+      "standard": {
+        "family": "ISO 26262-11 semiconductor guidance with IEC 61508 baseline",
+        "edition": "ISO 26262-11:2018 with IEC 61508:2010 baseline",
+        "parts": [
+          "11"
+        ],
+        "clauseRefs": [
+          "ISO 26262-11 semiconductor guidance"
+        ]
+      },
+      "difficulty": "Intermediate",
+      "stage": 2,
+      "systems": [
+        "Digital Design",
+        "Semiconductor FuSa Foundations"
+      ],
+      "summary": "Safety mechanisms are implemented in gates, flip-flops, clock domains and synthesis outcomes; a functional safety engineer working at silicon level needs enough digital-design fluency to ask precise questions about how a claimed mechanism is actually built, not just what it is called.",
+      "learningObjectives": [
+        "Explain the safety relevance of the combinational/sequential distinction and of clock-domain crossings.",
+        "Describe how RTL becomes a gate-level netlist through synthesis, and what must be preserved along the way.",
+        "Explain how design-for-test (DFT) structures double as functional-safety diagnostic mechanisms."
+      ],
+      "explanation": [
+        "Combinational logic has no memory: its output is a pure function of current inputs. Sequential logic (flip-flops, latches) holds state across clock edges. The distinction matters for safety because fault behavior differs sharply: a combinational fault can propagate instantly and transiently, while a sequential fault can be latched and persist. Diagnostic mechanisms are designed differently for each.",
+        "A clock-domain crossing (CDC) is any signal moving between two clock domains without a common, synchronized clock edge. Without proper synchronization, a CDC risks metastability \u2014 a flip-flop settling to an unpredictable or intermediate value. In a safety-relevant path, an unmanaged CDC is a systematic fault class waiting to happen, not a rare corner case.",
+        "Synthesis translates RTL (register-transfer-level hardware description, typically Verilog or VHDL) into a gate-level netlist matched to a target technology library, then place-and-route arranges and wires those gates physically. Each transformation must preserve functional equivalence, and for safety-relevant logic, equivalence checking and tool-confidence arguments are part of the evidence chain \u2014 not an assumption. Design-for-test structures such as scan chains, inserted to enable manufacturing test, are frequently reused as functional-safety diagnostic mechanisms (for example, periodic logic built-in self-test), which means DFT and safety architecture decisions cannot be made in isolation from each other."
+      ],
+      "whyItMatters": [
+        "A safety mechanism that looks correct in an RTL simulation can still be undermined by a synthesis, timing or DFT interaction invisible at the RTL level.",
+        "Freedom-from-interference arguments that work at the software level need a gate-level analogue when safety and non-safety logic share silicon resources."
+      ],
+      "inputs": [
+        "RTL source and microarchitecture spec",
+        "Clock and reset architecture",
+        "Target technology library and synthesis constraints",
+        "DFT/scan insertion plan"
+      ],
+      "activities": [
+        "Review clock-domain crossings on safety-relevant paths",
+        "Review synchronizer depth and metastability arguments",
+        "Confirm synthesis and equivalence-checking evidence for safety logic",
+        "Coordinate DFT insertion with the diagnostic-coverage plan"
+      ],
+      "outputs": [
+        "CDC and synchronizer review record",
+        "Synthesis/equivalence-checking evidence",
+        "DFT-to-diagnostic-mechanism mapping",
+        "Gate-level safety-relevant netlist baseline"
+      ],
+      "automotiveExample": "A 2-stage synchronizer was specified for a fault-flag signal crossing from a sensor-interface clock domain into the core clock domain. A review finds the flag's timing margin is too tight at the target frequency, and the synchronizer is widened to 3 stages with a documented metastability-time-before-failure argument before the design is signed off.",
+      "commonMistakes": [
+        "Assuming RTL simulation alone proves gate-level safety-mechanism behavior",
+        "Leaving clock-domain crossings on safety paths unreviewed",
+        "Treating DFT and functional-safety diagnostics as unrelated concerns owned by different teams",
+        "Accepting synthesis output without an equivalence or tool-confidence argument"
+      ],
+      "relatedConcepts": [
+        "semi-rtl-verification",
+        "semi-lockstep-redundancy",
+        "semi-design-lifecycle"
+      ],
+      "linkedQuestions": [
+        "S02-01",
+        "S02-02",
+        "S02-03",
+        "S02-04",
+        "S02-05",
+        "S02-06",
+        "S02-07",
+        "S02-08",
+        "S02-09",
+        "S02-10"
+      ],
+      "references": [
+        "ISO 26262-11:2018",
+        "ISO 26262-8:2018 tool confidence"
+      ],
+      "source": "content-source/semiconductor/concepts.json#semi-digital-design-fundamentals"
+    },
+    {
+      "id": "semi-design-lifecycle",
+      "title": "The Semiconductor Design and Safety Lifecycle",
+      "module": "semiconductor",
+      "collection": "semiconductor-silicon-functional-safety",
+      "order": 3,
+      "standard": {
+        "family": "ISO 26262-11 semiconductor guidance with IEC 61508 baseline",
+        "edition": "ISO 26262-11:2018 with IEC 61508:2010 baseline",
+        "parts": [
+          "11"
+        ],
+        "clauseRefs": [
+          "ISO 26262-11 semiconductor guidance"
+        ]
+      },
+      "difficulty": "Advanced",
+      "stage": 3,
+      "systems": [
+        "Design Flow & Lifecycle",
+        "Configuration Management"
+      ],
+      "summary": "The semiconductor design flow \u2014 specification, RTL, verification, synthesis, DFT insertion, physical design, tapeout, silicon bring-up, characterization and production \u2014 has fewer, more expensive and more irreversible gates than a vehicle software lifecycle, which changes how and when safety reviews must land.",
+      "learningObjectives": [
+        "List the major phases of an ASIC/SoC design flow and identify a safety work product for each.",
+        "Explain why tapeout functions as a hard configuration-control gate.",
+        "Plan safety reviews around a schedule with long-lead, expensive, largely irreversible milestones."
+      ],
+      "explanation": [
+        "A chip design flow runs roughly: specification and microarchitecture, RTL implementation, RTL verification, logic synthesis, DFT insertion, physical design (place-and-route, timing closure), tapeout (mask generation and fabrication handoff), silicon bring-up, characterization, and production ramp. Each phase produces artifacts a safety case depends on: the spec anchors safety requirements, RTL and verification anchor systematic-fault evidence, physical design anchors timing and DFT anchors diagnostic coverage.",
+        "Tapeout is treated as a hard gate because mask sets are expensive and slow to produce; a defect found after tapeout cannot simply be recompiled and redeployed the way software can. Post-tapeout fixes are limited to metal-layer engineering change orders (ECOs, when the defect can be resolved by rewiring existing transistors), documented errata plus a software or system-level mitigation, or a full silicon respin \u2014 each with sharply different cost, schedule and safety implications.",
+        "Because of this irreversibility, safety review gates must land before tapeout, not after, and configuration management must track exactly which RTL, netlist, physical-design and DFT baseline corresponds to which fabricated silicon revision. A customer's start-of-production date is frequently fixed well before design is complete, which means the safety plan has to be built around protecting review quality under schedule pressure rather than assuming schedule slack will be available."
+      ],
+      "whyItMatters": [
+        "A defect that would be a same-day software patch at the vehicle level can mean a multi-month, multi-million-dollar respin at the silicon level.",
+        "Configuration management errors (wrong baseline reaching the wrong review) are far costlier to discover late in this lifecycle than in a software lifecycle."
+      ],
+      "inputs": [
+        "Design-flow schedule and milestone plan",
+        "Safety plan with gate-specific review criteria",
+        "Configuration-management baseline definitions",
+        "Customer SOP commitments"
+      ],
+      "activities": [
+        "Map safety work products to design-flow phases",
+        "Define and protect pre-tapeout safety review gates",
+        "Establish baseline traceability across RTL, netlist and physical design",
+        "Plan post-tapeout errata and mitigation processes"
+      ],
+      "outputs": [
+        "Phase-to-work-product safety map",
+        "Protected pre-tapeout review record",
+        "Baseline traceability record",
+        "Errata and mitigation process definition"
+      ],
+      "automotiveExample": "A safety-relevant timing violation is discovered during physical-design signoff, two weeks before a committed tapeout date. Because the safety plan defined tapeout as a non-negotiable gate with named acceptance criteria, the program manager escalates for a schedule decision rather than allowing the violation to be waived informally under deadline pressure.",
+      "commonMistakes": [
+        "Scheduling the safety review as if it were a software milestone that can slip a sprint",
+        "Losing traceability between the RTL baseline and the fabricated silicon revision",
+        "Discovering a safety gap for the first time after tapeout",
+        "Treating errata as a customer-support issue disconnected from the safety case"
+      ],
+      "relatedConcepts": [
+        "semi-foundations",
+        "semi-hardware-safety-metrics",
+        "semi-certification-leadership"
+      ],
+      "linkedQuestions": [
+        "S03-01",
+        "S03-02",
+        "S03-03",
+        "S03-04",
+        "S03-05",
+        "S03-06",
+        "S03-07",
+        "S03-08",
+        "S03-09",
+        "S03-10"
+      ],
+      "references": [
+        "ISO 26262-11:2018",
+        "ISO 26262-8:2018 configuration management"
+      ],
+      "source": "content-source/semiconductor/concepts.json#semi-design-lifecycle"
+    },
+    {
+      "id": "semi-rtl-verification",
+      "title": "RTL Verification Strategy",
+      "module": "semiconductor",
+      "collection": "semiconductor-silicon-functional-safety",
+      "order": 4,
+      "standard": {
+        "family": "ISO 26262-11 semiconductor guidance with IEC 61508 baseline",
+        "edition": "ISO 26262-11:2018 with IEC 61508:2010 baseline",
+        "parts": [
+          "11"
+        ],
+        "clauseRefs": [
+          "ISO 26262-11 semiconductor guidance"
+        ]
+      },
+      "difficulty": "Advanced",
+      "stage": 4,
+      "systems": [
+        "RTL Verification",
+        "Digital Design"
+      ],
+      "summary": "RTL verification confirms that a design behaves correctly and, separately and just as importantly, that its safety mechanisms actually detect and react to the faults they claim to cover \u2014 two distinct verification goals that are easy to conflate.",
+      "learningObjectives": [
+        "Differentiate simulation, formal verification and emulation as RTL verification methods.",
+        "Explain why functional coverage and code coverage are necessary but not sufficient safety evidence.",
+        "Distinguish verifying that a design works from verifying that a safety mechanism detects and reacts to a fault."
+      ],
+      "explanation": [
+        "RTL simulation exercises a design against directed and constrained-random testbenches and observes behavior over time; it is broad but only as good as the scenarios it thinks to exercise. Formal verification proves properties (often written as SystemVerilog Assertions) hold for all possible input sequences within its model, which makes it strong at finding rare corner cases simulation would need enormous runtime to reach, but it does not replace simulation's ability to exercise realistic, timed, system-level behavior. Emulation runs the design on FPGA-based hardware for near-real-time speed, useful for software bring-up and long-running scenarios simulation cannot afford.",
+        "Code coverage (which lines or branches of RTL executed) and functional coverage (which meaningful scenarios occurred) both answer 'did we exercise this,' not 'does this work correctly under fault conditions.' A block can show 100% code coverage while a specific safety mechanism \u2014 say, a comparator's fault-flagging path \u2014 is never actually driven into its fault-detecting state by any test.",
+        "This is why safety-mechanism verification is treated as a distinct activity from functional verification: functional verification asks whether the design does the right thing when everything is healthy; safety-mechanism verification asks whether the design correctly detects and reacts when something is deliberately broken. The two require different test strategies, and a coverage report proving one does not imply the other."
+      ],
+      "whyItMatters": [
+        "A safety mechanism that has never been driven into its fault-detecting state by any test is, from an evidence standpoint, unverified \u2014 regardless of how healthy the surrounding coverage numbers look.",
+        "Formal counterexamples and simulation passes can disagree; reconciling them is a routine, expected part of safety-relevant verification, not a crisis."
+      ],
+      "inputs": [
+        "RTL and microarchitecture spec",
+        "Safety mechanism list and fault model",
+        "Verification plan and testbench environment",
+        "Formal property set (SVA)"
+      ],
+      "activities": [
+        "Plan separate functional and safety-mechanism verification strategies",
+        "Write and prove formal properties for safety-critical logic",
+        "Design directed tests that drive safety mechanisms into their fault-detecting state",
+        "Reconcile simulation and formal-verification findings"
+      ],
+      "outputs": [
+        "Functional and safety-mechanism coverage reports",
+        "Formal property proofs and counterexamples",
+        "Safety-mechanism verification evidence",
+        "Reconciliation record for conflicting findings"
+      ],
+      "automotiveExample": "A UVM testbench reports high functional coverage for a memory controller, but a formal proof finds one ECC configuration where a double-bit error is silently miscorrected instead of flagged. The formal counterexample becomes the trigger for a design fix, not a footnote, because the safety mechanism itself \u2014 not the memory controller's normal function \u2014 was the thing under test.",
+      "commonMistakes": [
+        "Treating high code or functional coverage as proof that safety mechanisms are verified",
+        "Relying on simulation alone for corner cases formal verification is better suited to find",
+        "Dismissing a formal counterexample because directed tests passed",
+        "Verifying a safety mechanism only in isolation, never as part of an integrated fault-injection scenario"
+      ],
+      "relatedConcepts": [
+        "semi-digital-design-fundamentals",
+        "semi-fault-injection-analysis",
+        "semi-lockstep-redundancy"
+      ],
+      "linkedQuestions": [
+        "S04-01",
+        "S04-02",
+        "S04-03",
+        "S04-04",
+        "S04-05",
+        "S04-06",
+        "S04-07",
+        "S04-08",
+        "S04-09",
+        "S04-10"
+      ],
+      "references": [
+        "ISO 26262-11:2018",
+        "ISO 26262-8:2018 tool confidence and verification"
+      ],
+      "source": "content-source/semiconductor/concepts.json#semi-rtl-verification"
+    },
+    {
+      "id": "semi-fault-injection-analysis",
+      "title": "Fault Injection and Silicon-Level Safety Analysis",
+      "module": "semiconductor",
+      "collection": "semiconductor-silicon-functional-safety",
+      "order": 5,
+      "standard": {
+        "family": "ISO 26262-11 semiconductor guidance with IEC 61508 baseline",
+        "edition": "ISO 26262-11:2018 with IEC 61508:2010 baseline",
+        "parts": [
+          "11"
+        ],
+        "clauseRefs": [
+          "ISO 26262-11 semiconductor guidance"
+        ]
+      },
+      "difficulty": "Advanced",
+      "stage": 5,
+      "systems": [
+        "Fault Injection & Analysis",
+        "RTL Verification"
+      ],
+      "summary": "Gate-level fault models, FMEDA and fault-injection campaigns turn a safety-mechanism design claim into a quantified, defensible diagnostic-coverage number \u2014 and each step from fault model to campaign result carries assumptions that a reviewer needs to be able to see.",
+      "learningObjectives": [
+        "Define stuck-at, transition and bridging fault models used in gate-level fault simulation.",
+        "Explain what an IP-block-level FMEDA covers and how it differs from a system-level FMEA.",
+        "Design a fault-injection campaign that substantiates, rather than merely asserts, a diagnostic-coverage claim."
+      ],
+      "explanation": [
+        "Gate-level fault simulation reasons about faults expressed at the netlist level: a stuck-at fault fixes a node permanently high or low, a transition fault models a delay defect that only shows up at speed, and a bridging fault models an unintended short between two nodes. These abstract, idealized fault models stand in for the much larger space of real physical defects, and single-event upsets (transient bit-flips from cosmic radiation or alpha particles, not tied to a permanent physical defect) are typically analyzed separately as soft errors rather than through the same gate-level fault models.",
+        "An IP-block-level FMEDA (Failure Modes, Effects and Diagnostic Analysis) walks the block's failure modes, classifies each as safe, single-point, residual, or dual-point (further split into detected, perceived and latent), and derives diagnostic coverage per mechanism. It differs from a system-level FMEA in scope and precision: it operates on gates and registers rather than components, and it must produce numbers \u2014 SPFM, LFM, and inputs to PMHF \u2014 not just qualitative failure descriptions.",
+        "A fault-injection campaign substantiates the FMEDA's coverage claim empirically: faults from the chosen model are injected (via simulation, emulation, or saboteur logic inserted into the netlist) and the design's response is observed \u2014 did the safety mechanism detect it, and within what latency? The campaign's fault list, sampling strategy and pass/fail criteria are all judgment calls that shape the resulting number, which is why a diagnostic-coverage percentage without its underlying campaign design is not yet evidence."
+      ],
+      "whyItMatters": [
+        "An FMEDA's diagnostic-coverage number is only as trustworthy as the fault model, fault list and campaign design behind it \u2014 the number alone tells a reviewer almost nothing.",
+        "Discrepancies between analytical FMEDA estimates and empirical fault-injection results are common and expected; how they are reconciled is itself part of the safety evidence."
+      ],
+      "inputs": [
+        "Gate-level netlist and fault models",
+        "Safety-mechanism design and expected fault response",
+        "Fault-injection tooling (simulation, emulation or saboteur-based)",
+        "Foundry or industry failure-rate data"
+      ],
+      "activities": [
+        "Classify failure modes and derive FMEDA diagnostic coverage per mechanism",
+        "Design and prioritize a fault-injection campaign",
+        "Reconcile analytical and empirical coverage results",
+        "Document fault-model and sampling assumptions explicitly"
+      ],
+      "outputs": [
+        "IP-block FMEDA with fault classification",
+        "Fault-injection campaign plan and results",
+        "Diagnostic-coverage evidence with stated assumptions",
+        "Reconciliation record for analytical vs. empirical gaps"
+      ],
+      "automotiveExample": "An ECC-protected memory's FMEDA analytically estimates 99% diagnostic coverage. A saboteur-based fault-injection campaign measures 94% because a rarely-exercised address-decode path was under-sampled in the analytical model. The gap triggers additional targeted campaign runs on that path rather than a silent acceptance of the lower empirical number.",
+      "commonMistakes": [
+        "Publishing a diagnostic-coverage percentage without describing the fault model or campaign behind it",
+        "Assuming an analytical FMEDA estimate needs no empirical substantiation",
+        "Treating single-event-upset (soft-error) risk with the same fault model as permanent stuck-at defects",
+        "Sampling fault-injection campaigns only in easily-reached design states"
+      ],
+      "relatedConcepts": [
+        "semi-rtl-verification",
+        "semi-hardware-safety-metrics",
+        "semi-lockstep-redundancy"
+      ],
+      "linkedQuestions": [
+        "S05-01",
+        "S05-02",
+        "S05-03",
+        "S05-04",
+        "S05-05",
+        "S05-06",
+        "S05-07",
+        "S05-08",
+        "S05-09",
+        "S05-10"
+      ],
+      "references": [
+        "ISO 26262-11:2018",
+        "ISO 26262-5:2018 hardware architectural metrics"
+      ],
+      "source": "content-source/semiconductor/concepts.json#semi-fault-injection-analysis"
+    },
+    {
+      "id": "semi-lockstep-redundancy",
+      "title": "Lockstep, Redundancy and Diagnostic Hardware Architectures",
+      "module": "semiconductor",
+      "collection": "semiconductor-silicon-functional-safety",
+      "order": 6,
+      "standard": {
+        "family": "ISO 26262-11 semiconductor guidance with IEC 61508 baseline",
+        "edition": "ISO 26262-11:2018 with IEC 61508:2010 baseline",
+        "parts": [
+          "11"
+        ],
+        "clauseRefs": [
+          "ISO 26262-11 semiconductor guidance"
+        ]
+      },
+      "difficulty": "Advanced",
+      "stage": 6,
+      "systems": [
+        "Lockstep & Redundancy",
+        "Digital Design"
+      ],
+      "summary": "Lockstep pairs, delayed lockstep, TMR, ECC and built-in self-test are the concrete diagnostic architectures that turn an abstract safety-mechanism claim into silicon \u2014 each with its own independence assumptions, comparator-fault risk, and cost/latency trade-off.",
+      "learningObjectives": [
+        "Explain how dual-core lockstep detects a fault and what the comparator actually compares.",
+        "Compare lockstep and Triple Modular Redundancy as diagnostic architectures.",
+        "Identify what independence claims a lockstep pair can and cannot make when it shares clock and power."
+      ],
+      "explanation": [
+        "In a dual-core lockstep architecture, two processing cores execute the same instruction stream and a comparator continuously checks that their outputs (or a checksum of internal state) match; a mismatch flags a fault. 'Delayed lockstep' staggers the second core's clock by a small number of cycles relative to the first, so that a transient disturbance (a voltage glitch, an SEU) affecting both cores at the same physical instant is far less likely to corrupt both cores' state identically at the moment of comparison \u2014 directly mitigating a specific common-cause failure mode that simple, same-cycle lockstep cannot.",
+        "Triple Modular Redundancy runs three instances and votes on the majority result, which can mask a single fault rather than merely detecting it, at roughly 3x area cost versus lockstep's roughly 2x; the choice between them is a latency, area, power and required-response (detect-and-degrade versus continue-operating) trade-off, not a purely technical one.",
+        "Independence is the recurring hard question: two lockstep cores sharing a single clock tree and power rail cannot claim independence from a shared clock-glitch or supply-droop event without additional analysis or mitigation (delayed lockstep, separate voltage regulation, or monitoring of the shared resource itself). And the comparator is itself a single point of failure unless something checks the checker \u2014 commonly a periodic self-test or a diverse, independently-implemented comparison path."
+      ],
+      "whyItMatters": [
+        "A lockstep architecture only delivers the independence a safety case claims for it if the shared resources (clock, power, physical layout) have been explicitly analyzed, not assumed away.",
+        "The comparator is exactly the kind of small, easy-to-overlook block whose own fault behavior can silently defeat an otherwise well-designed redundant architecture."
+      ],
+      "inputs": [
+        "Core microarchitecture and redundancy requirement",
+        "Clock and power distribution architecture",
+        "Independence and common-cause-failure analysis",
+        "Comparator design and self-check strategy"
+      ],
+      "activities": [
+        "Select and justify a redundancy architecture (lockstep, delayed lockstep, TMR) against latency/area/power constraints",
+        "Analyze shared clock, power and physical-layout independence",
+        "Design and verify the comparator's own fault detection",
+        "Specify LBIST or periodic self-test scheduling"
+      ],
+      "outputs": [
+        "Redundancy architecture selection and rationale",
+        "Independence and common-cause-failure analysis",
+        "Comparator self-check design and evidence",
+        "Diagnostic-mechanism timing budget (detection and reaction latency)"
+      ],
+      "automotiveExample": "A brake-adjacent SoC evaluates simple lockstep against delayed lockstep for its main CPU. Simple lockstep meets area and latency targets but a common-cause analysis shows a supply-voltage glitch could corrupt both cores identically in the same cycle; the team switches to a 2-cycle delayed lockstep configuration, at a small latency cost, to close that specific gap.",
+      "commonMistakes": [
+        "Claiming lockstep independence without analyzing shared clock and power",
+        "Never verifying the comparator's own fault behavior",
+        "Choosing TMR or lockstep by habit rather than against the actual latency/area/power requirement",
+        "Ignoring self-test scheduling trade-offs between power-up-only and periodic in-field checks"
+      ],
+      "relatedConcepts": [
+        "semi-digital-design-fundamentals",
+        "semi-fault-injection-analysis",
+        "semi-hardware-safety-metrics"
+      ],
+      "linkedQuestions": [
+        "S06-01",
+        "S06-02",
+        "S06-03",
+        "S06-04",
+        "S06-05",
+        "S06-06",
+        "S06-07",
+        "S06-08",
+        "S06-09",
+        "S06-10"
+      ],
+      "references": [
+        "ISO 26262-5:2018 hardware architectural metrics",
+        "ISO 26262-11:2018"
+      ],
+      "source": "content-source/semiconductor/concepts.json#semi-lockstep-redundancy"
+    },
+    {
+      "id": "semi-hardware-safety-metrics",
+      "title": "Hardware Safety Metrics for IP and SoC",
+      "module": "semiconductor",
+      "collection": "semiconductor-silicon-functional-safety",
+      "order": 7,
+      "standard": {
+        "family": "ISO 26262-11 semiconductor guidance with IEC 61508 baseline",
+        "edition": "ISO 26262-11:2018 with IEC 61508:2010 baseline",
+        "parts": [
+          "11"
+        ],
+        "clauseRefs": [
+          "ISO 26262-11 semiconductor guidance"
+        ]
+      },
+      "difficulty": "Advanced",
+      "stage": 7,
+      "systems": [
+        "Hardware Safety Metrics",
+        "Fault Injection & Analysis"
+      ],
+      "summary": "SPFM, LFM and PMHF are outputs of an architecture and analysis model, built from failure-rate data, fault classification and diagnostic-coverage evidence the IP producer alone can supply \u2014 and every one of those inputs carries assumptions a reviewer can and should challenge.",
+      "learningObjectives": [
+        "Identify which SPFM/LFM/PMHF inputs only the chip producer, not the integrator, can supply.",
+        "Explain what a base failure rate (BFR) is and where its underlying data typically comes from.",
+        "Explain why a single global diagnostic-coverage percentage is usually a red flag rather than reassurance."
+      ],
+      "explanation": [
+        "SPFM (Single-Point Fault Metric), LFM (Latent Fault Metric) and PMHF (Probabilistic Metric for random Hardware Failures) quantify how well an architecture's diagnostic mechanisms cover its random hardware failure modes. Only the IP producer can supply the block-level fault classification, mechanism-specific diagnostic coverage and base failure-rate data these metrics are built from; an integrator combines them with system-level data but cannot originate them.",
+        "Base failure rate data typically comes from industry reliability databases (such as those maintained by standards bodies or reliability consortia), foundry-supplied process reliability data, or a combination adjusted for the specific technology node, package and operating conditions. Because this data is generic by nature, every BFR carries an applicability argument: was it derived for a comparable process node, temperature range and mission profile.",
+        "A single global diagnostic-coverage percentage collapses many different fault classes, mechanisms and operating conditions into one number, which is precisely why a careful reviewer treats it as a starting question rather than an answer: which faults are included, which are excluded, what mechanism detects each included class, and at what latency. The same discipline that governs random-hardware-evidence review at the vehicle level (see the Functional Safety Management module) applies here, one level closer to the silicon."
+      ],
+      "whyItMatters": [
+        "A customer combining an IP vendor's metrics with their own system-level analysis can double-count or under-count risk if the metric's scope and assumptions aren't explicit.",
+        "Metrics published in a safety manual need to remain reproducible years after the original engineers who derived them have moved on."
+      ],
+      "inputs": [
+        "FMEDA fault classification and diagnostic coverage per mechanism",
+        "Base failure-rate data with applicability rationale",
+        "Mission profile and operating-condition assumptions",
+        "Diagnostic test interval and repair/replacement assumptions"
+      ],
+      "activities": [
+        "Derive SPFM, LFM and PMHF from FMEDA and failure-rate inputs",
+        "Document base-failure-rate applicability and sensitivity",
+        "Reconcile metric scope with customer system-level analysis",
+        "Maintain reproducible metric derivation records over the product's life"
+      ],
+      "outputs": [
+        "SPFM/LFM/PMHF calculation with stated assumptions",
+        "Base-failure-rate sourcing and applicability record",
+        "Sensitivity analysis for key assumptions",
+        "Safety-manual metric reporting package"
+      ],
+      "automotiveExample": "A customer's own mission profile assumes a longer diagnostic test interval than the IP vendor's published PMHF calculation used. Rather than re-deriving the entire hardware safety analysis, the vendor supplies a sensitivity table showing PMHF across a range of test intervals, letting the customer locate their own assumption on the existing curve.",
+      "commonMistakes": [
+        "Publishing a metric without the fault-classification and coverage assumptions behind it",
+        "Reusing base-failure-rate data across process nodes without an applicability check",
+        "Letting metrics go stale after a design or configuration change",
+        "Combining IP-level and system-level metrics without checking for double-counting"
+      ],
+      "relatedConcepts": [
+        "semi-fault-injection-analysis",
+        "semi-lockstep-redundancy",
+        "semi-seeoc-producer"
+      ],
+      "linkedQuestions": [
+        "S07-01",
+        "S07-02",
+        "S07-03",
+        "S07-04",
+        "S07-05",
+        "S07-06",
+        "S07-07",
+        "S07-08",
+        "S07-09",
+        "S07-10"
+      ],
+      "references": [
+        "ISO 26262-5:2018 hardware architectural metrics",
+        "ISO 26262-11:2018"
+      ],
+      "source": "content-source/semiconductor/concepts.json#semi-hardware-safety-metrics"
+    },
+    {
+      "id": "semi-seeoc-producer",
+      "title": "Safety Element out of Context: the Producer's Side",
+      "module": "semiconductor",
+      "collection": "semiconductor-silicon-functional-safety",
+      "order": 8,
+      "standard": {
+        "family": "ISO 26262-11 semiconductor guidance with IEC 61508 baseline",
+        "edition": "ISO 26262-11:2018 with IEC 61508:2010 baseline",
+        "parts": [
+          "11"
+        ],
+        "clauseRefs": [
+          "ISO 26262-11 semiconductor guidance"
+        ]
+      },
+      "difficulty": "Advanced",
+      "stage": 8,
+      "systems": [
+        "SEooC & Safety Manuals",
+        "Standards Landscape"
+      ],
+      "summary": "Authoring Assumptions of Use and a safety manual from the producer's side is the mirror image of consuming semiconductor safety evidence \u2014 the discipline shifts from verifying a supplier's claims to making claims another engineer, on another team, in another company, will have to verify.",
+      "learningObjectives": [
+        "Explain what an Assumptions of Use document commits the producer to, and the consequence of a customer violating it.",
+        "List the core sections a usable semiconductor safety manual must contain.",
+        "Explain why a SEooC is developed against an assumed ASIL before any specific customer program exists."
+      ],
+      "explanation": [
+        "A Safety Element out of Context is developed without a specific item context: no confirmed vehicle program, no confirmed HARA, sometimes no confirmed customer. To make that development tractable, the producer commits to assumed safety requirements, an assumed ASIL, and an explicit Assumptions of Use (AoU) statement \u2014 the conditions under which the element's safety claims hold. If an integrator's actual use violates the AoU, the element's safety claims no longer transfer, regardless of how rigorously it was developed.",
+        "A usable safety manual is not a certificate; it is an operating document. At minimum it states the element's safety requirements and diagnostic coverage, the AoU the integrator must satisfy, integration guidance (what the integrator must add \u2014 external monitoring, additional diagnostics, specific configuration), and the metrics (SPFM/LFM/PMHF or equivalent) with their scope and assumptions stated plainly enough for another engineer to check.",
+        "Developing against an assumed ASIL before a customer is signed is a genuine business and engineering risk: guess too low, and the element cannot be used in the safety-critical programs it was meant for; guess too high, and unnecessary rigor is spent everywhere the element ships, including non-safety-critical uses. This tension is why AoU and safety-manual authoring is treated as a technical-leadership decision, not a documentation afterthought."
+      ],
+      "whyItMatters": [
+        "An AoU that is vague or unfalsifiable is not usable evidence \u2014 a customer's integration review can neither confirm nor violate it.",
+        "The producer-side discipline (make claims someone else must verify) is the direct mirror of the consumer-side discipline already taught in the Functional Safety Management module (verify claims someone else made) \u2014 understanding both sides sharpens each."
+      ],
+      "inputs": [
+        "Assumed safety requirements and target ASIL",
+        "Element boundary and interface definition",
+        "FMEDA and hardware safety metrics",
+        "Anticipated integration contexts and use cases"
+      ],
+      "activities": [
+        "Draft specific, falsifiable Assumptions of Use",
+        "Author safety-manual sections usable by an integrator who has not seen the internal design",
+        "Decide and justify the assumed ASIL before customer confirmation",
+        "Maintain safety-manual synchronization across multiple customer configurations"
+      ],
+      "outputs": [
+        "Assumptions of Use document",
+        "Semiconductor safety manual",
+        "Assumed-ASIL decision rationale",
+        "Integration guidance for downstream safety cases"
+      ],
+      "automotiveExample": "A lockstep CPU core's safety manual states, as an AoU, that the integrating SoC must provide independent voltage and clock monitoring outside the core itself. A customer's integration review finds their board design relies on the core's own internal monitors instead \u2014 a direct AoU violation \u2014 and the two teams jointly redesign the monitoring architecture before the safety case can proceed.",
+      "commonMistakes": [
+        "Writing Assumptions of Use too vaguely to be checked",
+        "Treating the safety manual as marketing collateral rather than operating evidence",
+        "Letting safety-manual versions drift out of sync across different customer configurations",
+        "Choosing an assumed ASIL without a documented rationale"
+      ],
+      "relatedConcepts": [
+        "semi-foundations",
+        "semi-hardware-safety-metrics",
+        "semi-standards-landscape"
+      ],
+      "linkedQuestions": [
+        "S08-01",
+        "S08-02",
+        "S08-03",
+        "S08-04",
+        "S08-05",
+        "S08-06",
+        "S08-07",
+        "S08-08",
+        "S08-09",
+        "S08-10"
+      ],
+      "references": [
+        "ISO 26262-11:2018",
+        "ISO 26262-8:2018 supplier interfaces"
+      ],
+      "source": "content-source/semiconductor/concepts.json#semi-seeoc-producer"
+    },
+    {
+      "id": "semi-standards-landscape",
+      "title": "Standards Landscape: IEC 61508, ISO/SAE 21434 and ASPICE",
+      "module": "semiconductor",
+      "collection": "semiconductor-silicon-functional-safety",
+      "order": 9,
+      "standard": {
+        "family": "ISO 26262-11 semiconductor guidance with IEC 61508 baseline",
+        "edition": "ISO 26262-11:2018 with IEC 61508:2010 baseline",
+        "parts": [
+          "11"
+        ],
+        "clauseRefs": [
+          "ISO 26262-11 semiconductor guidance"
+        ]
+      },
+      "difficulty": "Advanced",
+      "stage": 9,
+      "systems": [
+        "Standards Landscape",
+        "SEooC & Safety Manuals"
+      ],
+      "summary": "ISO 26262 inherits its structure from IEC 61508, sits alongside ISO/SAE 21434 for cybersecurity and ASPICE for process capability, and a semiconductor safety engineer routinely works at the seams where these standards' concerns genuinely overlap, such as a hardware root of trust.",
+      "learningObjectives": [
+        "Explain the structural relationship between ISO 26262 and IEC 61508.",
+        "Differentiate a TARA under ISO/SAE 21434 from a HARA under ISO 26262.",
+        "Identify where functional safety and cybersecurity requirements reinforce or conflict on a semiconductor block."
+      ],
+      "explanation": [
+        "ISO 26262 is the automotive derivative of IEC 61508, the base functional-safety standard for electrical, electronic and programmable electronic safety-related systems across industries. The inheritance means core concepts \u2014 safety lifecycle, safety integrity levels (61508's SIL, 26262's ASIL), systematic and random hardware failure treatment \u2014 carry over structurally, even though the automotive-specific detail (ASIL determination via severity/exposure/controllability, ASIL decomposition rules) is 26262's own contribution. A component developed to 61508 for an industrial context is not automatically qualified for automotive reuse; ISO 26262-11 requires re-analysis of the differences.",
+        "A TARA (Threat Analysis and Risk Assessment) under ISO/SAE 21434 identifies cybersecurity threats and assesses their risk, in the same structural position a HARA occupies for functional safety: both feed requirements back into the design. But their objectives differ \u2014 a HARA asks what happens if the system fails; a TARA asks what happens if the system is deliberately attacked \u2014 and a mechanism can satisfy one concern while creating tension with the other.",
+        "A hardware root of trust or secure-boot mechanism is a clear seam: it may be relied upon as a safety mechanism (ensuring only validated, safety-qualified firmware runs) and simultaneously as a security mechanism (preventing malicious firmware). Analyzing it requires both a functional-safety and a cybersecurity lens together, because a fix that improves one property in isolation \u2014 say, a faster but less rigorously verified boot path \u2014 can quietly weaken the other. ASPICE's hardware engineering (HWE) process group provides the process-capability lens across all of this: it assesses whether the organization's hardware development process itself is capable and consistently applied, which is a different question from whether any single product's safety case is technically sound."
+      ],
+      "whyItMatters": [
+        "Functional safety and cybersecurity teams frequently both claim ownership of the same hardware mechanism, and resolving that overlap deliberately is more productive than letting it default to whichever team asks first.",
+        "A component's standards pedigree (61508 vs. 26262, or a different ASIL/SIL target) does not transfer automatically across industries or programs \u2014 it has to be re-argued, not assumed."
+      ],
+      "inputs": [
+        "ISO 26262 safety requirements and ASIL targets",
+        "ISO/SAE 21434 TARA outputs and cybersecurity requirements",
+        "ASPICE HWE process assessment context",
+        "Legacy or cross-industry component pedigree"
+      ],
+      "activities": [
+        "Reconcile safety and cybersecurity requirements on shared mechanisms",
+        "Re-assess cross-industry or cross-standard component reuse",
+        "Map ASPICE HWE process evidence alongside ISO 26262 technical evidence",
+        "Coordinate joint reviews where safety and security concerns intersect"
+      ],
+      "outputs": [
+        "Joint safety/cybersecurity analysis for shared mechanisms",
+        "Reuse re-assessment record for cross-standard components",
+        "ASPICE HWE and ISO 26262 evidence cross-map",
+        "Standards-applicability rationale for the element"
+      ],
+      "automotiveExample": "A secure-boot mechanism is relied upon both to keep malicious firmware out (a 21434 concern) and to ensure only safety-validated firmware runs (a 26262 concern). A joint review finds that a proposed boot-time optimization would reduce cryptographic verification depth to save latency, improving a safety-relevant startup-time budget while weakening the cybersecurity property the same mechanism was meant to guarantee \u2014 and the two teams jointly redesign the trade-off instead of resolving it unilaterally.",
+      "commonMistakes": [
+        "Assuming a component's safety pedigree transfers automatically across industries or standards",
+        "Letting safety and cybersecurity teams resolve shared-mechanism conflicts independently and inconsistently",
+        "Treating ASPICE process evidence and ISO 26262 technical evidence as unrelated deliverables",
+        "Confusing a TARA's threat-based reasoning with a HARA's failure-based reasoning"
+      ],
+      "relatedConcepts": [
+        "semi-foundations",
+        "semi-seeoc-producer",
+        "semi-certification-leadership"
+      ],
+      "linkedQuestions": [
+        "S09-01",
+        "S09-02",
+        "S09-03",
+        "S09-04",
+        "S09-05",
+        "S09-06",
+        "S09-07",
+        "S09-08",
+        "S09-09",
+        "S09-10"
+      ],
+      "references": [
+        "IEC 61508:2010",
+        "ISO/SAE 21434:2021",
+        "ISO 26262-11:2018"
+      ],
+      "source": "content-source/semiconductor/concepts.json#semi-standards-landscape"
+    },
+    {
+      "id": "semi-certification-leadership",
+      "title": "Certification, Assessment and Technical Leadership",
+      "module": "semiconductor",
+      "collection": "semiconductor-silicon-functional-safety",
+      "order": 10,
+      "standard": {
+        "family": "ISO 26262-11 semiconductor guidance with IEC 61508 baseline",
+        "edition": "ISO 26262-11:2018 with IEC 61508:2010 baseline",
+        "parts": [
+          "11"
+        ],
+        "clauseRefs": [
+          "ISO 26262-11 semiconductor guidance"
+        ]
+      },
+      "difficulty": "Expert",
+      "stage": 10,
+      "systems": [
+        "Certification & Leadership",
+        "Standards Landscape"
+      ],
+      "summary": "Preparing a semiconductor safety case for assessment, defending it to a customer's mixed technical and program audience, and building the organizational capability to do this repeatably are technical-leadership skills layered on top of everything else this module covers.",
+      "learningObjectives": [
+        "Differentiate a confirmation review, a functional safety audit and a functional safety assessment for a semiconductor program.",
+        "List the documents that make up a minimal, defensible semiconductor safety case package.",
+        "Prepare and tailor a safety-case argument for audiences with different technical backgrounds."
+      ],
+      "explanation": [
+        "A confirmation review checks a specific work product against its defined criteria. A functional safety audit examines whether the organization's process, as defined, is actually being followed. A functional safety assessment evaluates whether the achieved functional safety of the item or element is adequate \u2014 a judgment call, not a checklist pass. Applied to a semiconductor program, the assessment additionally has to weigh evidence scattered across RTL, verification, DFT, physical design and metrics teams that may never have worked together on a single deliverable before.",
+        "A minimal, defensible safety case package typically includes the safety plan, the FMEDA and derived metrics, the safety-relevant verification and fault-injection evidence, the safety manual with its Assumptions of Use, and a traceable link from assumed safety requirements down to implementation and verification evidence. Technical completeness on paper is not sufficient if that evidence is scattered across disconnected tools and repositories an assessor \u2014 or a future engineer \u2014 cannot navigate; findings of this kind are common and are treated as seriously as a technical gap.",
+        "Defending this evidence to a customer means tailoring the same underlying argument to different audiences in the same conversation: a control engineer wants to know what the mechanism actually does under fault conditions, a safety engineer wants the metric derivation and assumptions, and a program manager wants to know what residual risk and schedule exposure remain. The capstone skill this module builds toward is designing the end-to-end safety approach \u2014 item/element boundary, RTL, verification, hardware metrics, safety manual, certification support \u2014 for a new IP core from the start, rather than assembling it retroactively."
+      ],
+      "whyItMatters": [
+        "An assessor's finding that evidence is technically complete but organizationally scattered is a real, common, costly finding \u2014 not a formality to brush past.",
+        "The ability to tailor one underlying safety argument to different technical audiences, without changing its substance, is what makes a safety case usable rather than merely correct."
+      ],
+      "inputs": [
+        "Complete safety case package (plan, FMEDA, verification evidence, safety manual)",
+        "Assessor or customer review scope and criteria",
+        "Cross-functional team availability (RTL, verification, DFT, physical design)",
+        "Customer program schedule and SOP commitments"
+      ],
+      "activities": [
+        "Assemble and cross-reference a complete, navigable safety case package",
+        "Prepare a cross-functional team for external assessment",
+        "Tailor safety-case argument delivery to different stakeholder audiences",
+        "Design the end-to-end safety approach for a new IP program from inception"
+      ],
+      "outputs": [
+        "Assessment-ready safety case package",
+        "Assessment or audit finding responses",
+        "Stakeholder-tailored safety-case briefings",
+        "End-to-end safety approach for a new IP program"
+      ],
+      "automotiveExample": "Six months from tapeout, a program is found to have no consolidated safety plan \u2014 evidence exists but is scattered across individual engineers' working files. The technical lead's first action is not to start writing missing analyses, but to consolidate and cross-reference what already exists into one traceable package, surfacing genuine gaps only after that baseline is established.",
+      "commonMistakes": [
+        "Assembling safety evidence only in preparation for an assessment rather than continuously",
+        "Presenting the same undifferentiated technical detail to every audience regardless of their role",
+        "Treating a scattered-evidence finding as a paperwork issue rather than a real capability gap",
+        "Waiting until late in a program to design the end-to-end safety approach rather than from inception"
+      ],
+      "relatedConcepts": [
+        "semi-design-lifecycle",
+        "semi-seeoc-producer",
+        "semi-standards-landscape"
+      ],
+      "linkedQuestions": [
+        "S10-01",
+        "S10-02",
+        "S10-03",
+        "S10-04",
+        "S10-05",
+        "S10-06",
+        "S10-07",
+        "S10-08",
+        "S10-09",
+        "S10-10"
+      ],
+      "references": [
+        "ISO 26262-2:2018 safety management",
+        "ISO 26262-11:2018"
+      ],
+      "source": "content-source/semiconductor/concepts.json#semi-certification-leadership"
+    }
+  ]
+}

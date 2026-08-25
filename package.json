@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "assemble:embedded": "node scripts/assemble-embedded-source.mjs",
-    "build:concepts": "npm run assemble:embedded && node scripts/build-concepts.mjs && node scripts/build-aerospace-concepts.mjs",
-    "check:concepts": "npm run assemble:embedded && node scripts/build-concepts.mjs --check && node scripts/build-aerospace-concepts.mjs --check",
+    "build:concepts": "npm run assemble:embedded && node scripts/build-concepts.mjs && node scripts/build-aerospace-concepts.mjs && node scripts/build-semiconductor-concepts.mjs",
+    "check:concepts": "npm run assemble:embedded && node scripts/build-concepts.mjs --check && node scripts/build-aerospace-concepts.mjs --check && node scripts/build-semiconductor-concepts.mjs --check",
     "render:concept": "node scripts/render-concept-source.mjs",
     "validate:schemas": "node scripts/validate-schema-contracts.mjs",
     "validate": "npm run build:concepts && node scripts/validate-content.mjs && node scripts/validate-concepts-ui.mjs && node scripts/validate-concept-selector.mjs && node scripts/validate-home-ui.mjs && node scripts/validate-comparison-ui.mjs && node scripts/validate-firmware-deep-dive.mjs && npm run validate:schemas"

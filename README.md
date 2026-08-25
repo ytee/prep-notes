@@ -8,6 +8,7 @@ Current modules:
 - **AUTOSAR Classic Platform** — 100 architecture, configuration, stack and integration exercises.
 - **Embedded Systems & Firmware** — 10 core concepts and 100 exercises spanning firmware, RTOS, Linux, Android/AAOS, platform architecture and technical leadership.
 - **Safety-Critical Aerospace Software** — 10 concepts and 100 exercises spanning DO-178B/C assurance, requirements, model-based development, target implementation, HIL, structural coverage, certification and technical leadership.
+- **Semiconductor & Silicon Functional Safety** — 10 concepts and 100 exercises spanning element-level (SEooC) foundations, digital design, the semiconductor design/safety lifecycle, RTL verification, fault injection and FMEDA, lockstep/redundant hardware architectures, hardware safety metrics, safety-manual authoring, the IEC 61508/ISO 21434/ASPICE standards landscape, and certification-ready technical leadership.
 
 ## Learning model
 
@@ -130,6 +131,47 @@ Each stage contains exactly ten exercises, including:
 
 The full bank contains **100 exercises** and the concept collection links every stage concept directly to its ten exercises.
 
+## Semiconductor & Silicon Functional Safety
+
+The module is employer-neutral. Coverage draws on public functional-safety, verification and semiconductor-industry practice, not any single company's internal material.
+
+### Ten-stage route
+
+1. Semiconductor functional safety foundations
+2. Digital design fundamentals for safety engineers
+3. The semiconductor design and safety lifecycle
+4. RTL verification strategy
+5. Fault injection and silicon-level safety analysis
+6. Lockstep, redundancy and diagnostic hardware architectures
+7. Hardware safety metrics for IP and SoC
+8. Safety Element out of Context: the producer's side
+9. Standards landscape: IEC 61508, ISO/SAE 21434 and ASPICE
+10. Certification, assessment and technical leadership
+
+Each stage contains exactly ten exercises, including:
+
+- at least two strong foundation questions;
+- at least seven advanced or expert technical questions;
+- one technical-management scenario;
+- one certification scenario;
+- one customer-integration scenario;
+- one engineering-lead scenario.
+
+The complete module provides:
+
+- 10 concept records, one per stage;
+- 100 exercises;
+- direct concept-to-exercise mappings;
+- RTL, digital-design, synthesis, DFT and clock-domain scenarios;
+- gate-level fault-model, FMEDA and fault-injection-campaign questions;
+- lockstep, delayed lockstep, TMR and comparator-independence scenarios;
+- SPFM/LFM/PMHF and base-failure-rate producer-side questions;
+- Assumptions of Use and safety-manual authoring exercises;
+- IEC 61508, ISO/SAE 21434 and ASPICE HWE standards-landscape questions;
+- assessment, safety-case defense and technical-leadership scenarios.
+
+This module deliberately complements, rather than duplicates, the Functional Safety Management module's existing hardware-safety content (Day 5–6: FMEA/FTA/DFA, SPFM/LFM/PMHF, hardware safety lifecycle management): the FSM module teaches that content from the vehicle-level integrator's side — consuming a semiconductor supplier's safety evidence; this module teaches the same underlying concepts from the semiconductor producer's side — authoring RTL-level verification, FMEDA and safety-manual evidence for someone else to consume.
+
 ## Functional Safety Management concepts
 
 Functional Safety uses ISO 26262:2018 as its published baseline. The 23-concept collection covers foundations plus two management concepts for every route stage from 2 through 10.
@@ -167,7 +209,8 @@ auto-learning-platform/
 ├── content-source/
 │   ├── safety/concepts/functional-safety-management/*.md
 │   ├── embedded-systems/concepts/*.json
-│   └── aerospace/concepts.json
+│   ├── aerospace/concepts.json
+│   └── semiconductor/concepts.json
 ├── data/
 │   ├── home.json
 │   ├── topics.json
@@ -179,7 +222,11 @@ auto-learning-platform/
 │   │   ├── meta.json
 │   │   ├── day1.json ... day10.json
 │   │   └── concepts.json
-│   └── aerospace/
+│   ├── aerospace/
+│   │   ├── meta.json
+│   │   ├── exercises.json
+│   │   └── concepts.json
+│   └── semiconductor/
 │       ├── meta.json
 │       ├── exercises.json
 │       └── concepts.json
@@ -195,6 +242,7 @@ auto-learning-platform/
 │   ├── assemble-embedded-source.mjs
 │   ├── build-concepts.mjs
 │   ├── build-aerospace-concepts.mjs
+│   ├── build-semiconductor-concepts.mjs
 │   ├── render-concept-source.mjs
 │   ├── validate-content.mjs
 │   ├── validate-concepts-ui.mjs
@@ -207,7 +255,7 @@ auto-learning-platform/
 └── netlify.toml
 ```
 
-Functional Safety concepts use Markdown as their canonical source. Embedded Systems concepts use versioned JSON concept records under `content-source/embedded-systems/concepts/`. Aerospace concepts use the version-controlled collection at `content-source/aerospace/concepts.json`. Builds assemble these forms into deterministic runtime JSON for the site.
+Functional Safety concepts use Markdown as their canonical source. Embedded Systems concepts use versioned JSON concept records under `content-source/embedded-systems/concepts/`. Aerospace and Semiconductor concepts each use a version-controlled collection file (`content-source/aerospace/concepts.json`, `content-source/semiconductor/concepts.json`). Builds assemble these forms into deterministic runtime JSON for the site.
 
 ## Versioned generation contracts
 
@@ -258,6 +306,7 @@ autoNotesNvM:safety
 autoNotesNvM:autosar
 autoNotesNvM:embedded
 autoNotesNvM:aerospace
+autoNotesNvM:semiconductor
 ```
 
 State is not synchronized across devices. The discovery home reads these same keys to determine the most relevant Continue Learning destination.
