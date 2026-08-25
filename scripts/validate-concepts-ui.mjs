@@ -44,7 +44,7 @@ if (navigationScriptPosition < domainLabelsPosition) {
 }
 
 const manifest = readJson('data/topics.json');
-const expectedModules = new Set(['safety', 'autosar', 'embedded', 'aerospace']);
+const expectedModules = new Set(['safety', 'autosar', 'embedded', 'aerospace', 'semiconductor']);
 for (const moduleId of expectedModules) {
   if (!manifest.topics?.some(module => module.id === moduleId)) {
     fail(`data/topics.json: missing ${moduleId} module`);
@@ -97,6 +97,7 @@ const safetyModel = validateConceptCollection('safety', 23, new Map([
 const oneConceptPerStage = new Map(Array.from({ length: 10 }, (_, index) => [index + 1, 1]));
 const embeddedModel = validateConceptCollection('embedded', 10, oneConceptPerStage);
 const aerospaceModel = validateConceptCollection('aerospace', 10, oneConceptPerStage);
+const semiconductorModel = validateConceptCollection('semiconductor', 10, oneConceptPerStage);
 
 const conceptsScript = readText('assets/concepts.js');
 for (const behavior of [
@@ -167,6 +168,7 @@ function simulateDomainLabelObserver(moduleId) {
 
 simulateDomainLabelObserver('safety');
 simulateDomainLabelObserver('aerospace');
+simulateDomainLabelObserver('semiconductor');
 
 const navigationScript = readText('assets/navigation.js');
 for (const behavior of [
@@ -199,5 +201,6 @@ for (const style of [
 console.log(
   `Learning UI validation passed: ${safetyModel.concepts.length} Safety concepts, ` +
   `${embeddedModel.concepts.length} Embedded concepts, ${aerospaceModel.concepts.length} Aerospace concepts, ` +
+  `${semiconductorModel.concepts.length} Semiconductor concepts, ` +
   'stable domain-label observers and simplified progressive navigation.'
 );

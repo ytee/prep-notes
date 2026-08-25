@@ -58,6 +58,17 @@
         "data/aerospace/exercises.json"
       ],
       "concepts": "data/aerospace/concepts.json"
+    },
+    {
+      "id": "semiconductor",
+      "title": "Semiconductor & Silicon Functional Safety",
+      "subtitle": "RTL × Verification × Lockstep & Redundancy × Hardware Metrics × Certification Leadership",
+      "description": "Functional safety at the semiconductor and silicon IP level: element-level foundations, digital design, RTL verification, fault injection, lockstep and redundant architectures, hardware safety metrics, Safety Element out of Context authoring, the wider standards landscape and certification-ready technical leadership.",
+      "content": "data/semiconductor/meta.json",
+      "questionFiles": [
+        "data/semiconductor/exercises.json"
+      ],
+      "concepts": "data/semiconductor/concepts.json"
     }
   ]
 }

@@ -1,0 +1,2153 @@
+[
+  {
+    "id": "S01-01",
+    "day": 1,
+    "tier": "Foundation",
+    "kind": "Concept",
+    "tracks": [
+      "Semiconductor FuSa Foundations"
+    ],
+    "question": "What is a semiconductor \u201csafety element\u201d and how does developing one differ from developing a vehicle-level item?",
+    "minutes": 6,
+    "answer": [
+      "An element is developed without a confirmed vehicle context, against assumed safety requirements and an assumed ASIL, then integrated into an item the design team never sees.",
+      "An item's safety goals come directly from its own HARA; an element's do not exist yet at design time and must be assumed."
+    ],
+    "probes": [
+      "What happens to the element's safety claims if the eventual item context violates the assumption?"
+    ],
+    "refs": [
+      "ISO 26262-11:2018"
+    ]
+  },
+  {
+    "id": "S01-02",
+    "day": 1,
+    "tier": "Foundation",
+    "kind": "Concept",
+    "tracks": [
+      "Semiconductor FuSa Foundations"
+    ],
+    "question": "Explain Safety Element out of Context (SEooC) from the producer's side versus the consumer's side.",
+    "minutes": 6,
+    "answer": [
+      "The producer commits to Assumptions of Use and assumed safety requirements without knowing the final integrator.",
+      "The consumer (integrator) must verify their actual use satisfies those assumptions before relying on the element's safety claims."
+    ],
+    "probes": [
+      "Which side is responsible when an assumption turns out to be ambiguous rather than clearly violated?"
+    ],
+    "refs": [
+      "ISO 26262-10:2018"
+    ]
+  },
+  {
+    "id": "S01-03",
+    "day": 1,
+    "tier": "Intermediate",
+    "kind": "Concept",
+    "tracks": [
+      "Semiconductor FuSa Foundations"
+    ],
+    "question": "Why does ISO 26262-11 exist alongside Part 5 hardware development? What does it add specifically for semiconductors?",
+    "minutes": 7,
+    "answer": [
+      "Part 5 defines general hardware development; Part 11 interprets it for IC-specific concerns such as reuse across nodes, systematic capability of generated versus hand-written logic, and DFT interactions.",
+      "It addresses the scale at which one defect class can appear across millions of instantiated gates, which vehicle-level hardware guidance does not."
+    ],
+    "probes": [
+      "Where would a vehicle-level ECU hardware engineer's experience transfer directly, and where would it not?"
+    ],
+    "refs": [
+      "ISO 26262-11:2018",
+      "ISO 26262-5:2018"
+    ]
+  },
+  {
+    "id": "S01-04",
+    "day": 1,
+    "tier": "Advanced",
+    "kind": "Analysis",
+    "tracks": [
+      "Semiconductor FuSa Foundations"
+    ],
+    "question": "A team wants to reuse digital logic with no ISO 26262 pedigree inside a new safety-relevant IP block. How do you assess and justify (or reject) that reuse?",
+    "minutes": 10,
+    "answer": [
+      "Assess the logic's original development rigor, available verification evidence, and systematic-capability argument against the target ASIL.",
+      "Where evidence is insufficient, require additional verification, proven-in-use argument, or redesign rather than accepting the reuse on schedule grounds alone."
+    ],
+    "probes": [
+      "What evidence would make a proven-in-use argument credible here versus merely convenient?"
+    ],
+    "refs": [
+      "ISO 26262-8:2018 qualification of software/hardware components"
+    ]
+  },
+  {
+    "id": "S01-05",
+    "day": 1,
+    "tier": "Advanced",
+    "kind": "Analysis",
+    "tracks": [
+      "Semiconductor FuSa Foundations"
+    ],
+    "question": "Explain how systematic capability is claimed for hand-written RTL versus logic produced by generation or high-level synthesis tools.",
+    "minutes": 9,
+    "answer": [
+      "Hand-written RTL's systematic capability rests on the design and review process applied to it directly.",
+      "Generated logic's systematic capability depends additionally on the generating tool's confidence level and the verification applied to its output, not just the source description."
+    ],
+    "probes": [
+      "What tool-confidence evidence would you need before trusting generated logic in an ASIL D path?"
+    ],
+    "refs": [
+      "ISO 26262-8:2018 tool confidence"
+    ]
+  },
+  {
+    "id": "S01-06",
+    "day": 1,
+    "tier": "Advanced",
+    "kind": "Analysis",
+    "tracks": [
+      "Semiconductor FuSa Foundations"
+    ],
+    "question": "A supplier claims their IP core is \u201cASIL D ready.\u201d What evidence would you demand before accepting that claim?",
+    "minutes": 9,
+    "answer": [
+      "A safety plan, safety case, FMEDA with stated assumptions, safety manual, and Assumptions of Use that trace to the claimed ASIL.",
+      "Evidence that the claim was substantiated for a comparable use case to your own, not just asserted in marketing material."
+    ],
+    "probes": [
+      "Which single missing document would make you reject the claim outright regardless of everything else supplied?"
+    ],
+    "refs": [
+      "ISO 26262-11:2018"
+    ]
+  },
+  {
+    "id": "S01-07",
+    "day": 1,
+    "tier": "Advanced",
+    "kind": "Technical management",
+    "tracks": [
+      "Semiconductor FuSa Foundations",
+      "Role Scenarios"
+    ],
+    "question": "Multiple IP teams (CPU core, memory controller, interconnect) each contribute evidence to one SoC-level safety case. How do you sequence and govern their delivery?",
+    "minutes": 12,
+    "answer": [
+      "Define a shared safety work-product schedule with explicit dependencies and interface points between the teams' evidence.",
+      "Govern through joint reviews at defined gates rather than letting each team's evidence arrive independently and get reconciled only at the end."
+    ],
+    "probes": [
+      "What early warning sign would tell you two teams' evidence won't reconcile before it actually fails to?"
+    ],
+    "refs": [
+      "ISO 26262-2:2018 safety management"
+    ]
+  },
+  {
+    "id": "S01-08",
+    "day": 1,
+    "tier": "Advanced",
+    "kind": "Certification scenario",
+    "tracks": [
+      "Semiconductor FuSa Foundations",
+      "Role Scenarios"
+    ],
+    "question": "An assessor challenges whether your semiconductor safety plan adequately separates item-level and element-level responsibilities. How do you respond?",
+    "minutes": 11,
+    "answer": [
+      "Show the explicit boundary definition, the Assumptions of Use that hand off item-level responsibility, and where your plan stops by design.",
+      "If the separation genuinely is unclear in the plan, treat the finding as valid and revise the boundary definition rather than arguing intent."
+    ],
+    "probes": [
+      "How would you distinguish a legitimate finding here from an assessor simply unfamiliar with element-level development?"
+    ],
+    "refs": [
+      "ISO 26262-11:2018",
+      "ISO 26262-2:2018"
+    ]
+  },
+  {
+    "id": "S01-09",
+    "day": 1,
+    "tier": "Advanced",
+    "kind": "Customer integration scenario",
+    "tracks": [
+      "Semiconductor FuSa Foundations",
+      "Role Scenarios"
+    ],
+    "question": "A Tier-1 customer integrating your IP asks for safety evidence beyond your standard safety manual. How do you scope what you owe versus what is their responsibility?",
+    "minutes": 11,
+    "answer": [
+      "Compare their request against the published Assumptions of Use and element boundary to determine what falls inside your scope.",
+      "Where the request falls outside AoU scope, provide what genuinely helps their integration without implicitly accepting responsibility that belongs to their item-level safety case."
+    ],
+    "probes": [
+      "What would make you conclude the AoU themselves need revising rather than just the response to this one customer?"
+    ],
+    "refs": [
+      "ISO 26262-11:2018",
+      "ISO 26262-8:2018 supplier interfaces"
+    ]
+  },
+  {
+    "id": "S01-10",
+    "day": 1,
+    "tier": "Expert",
+    "kind": "Engineering lead scenario",
+    "tracks": [
+      "Semiconductor FuSa Foundations",
+      "Role Scenarios"
+    ],
+    "question": "You are building a new functional safety team for a semiconductor IP business unit from scratch. What core competencies do you hire or build first, and why?",
+    "minutes": 14,
+    "answer": [
+      "Prioritize people who can bridge digital design and safety-process discipline, since that bridge is the scarcest skill and the one most often missing entirely.",
+      "Sequence FMEDA/hardware-metrics and safety-manual authoring capability early, since every downstream customer relationship depends on those two deliverables existing credibly."
+    ],
+    "probes": [
+      "Which competency would you deliberately defer building in-house, and rely on external support for instead, in year one?"
+    ],
+    "refs": [
+      "ISO 26262-2:2018 safety management"
+    ]
+  },
+  {
+    "id": "S02-01",
+    "day": 2,
+    "tier": "Foundation",
+    "kind": "Concept",
+    "tracks": [
+      "Digital Design"
+    ],
+    "question": "Define combinational versus sequential logic and explain why the distinction matters for fault behavior.",
+    "minutes": 5,
+    "answer": [
+      "Combinational logic's output is a pure function of current inputs with no memory; sequential logic (flip-flops, latches) holds state across clock edges.",
+      "A combinational fault can propagate instantly and transiently, while a sequential fault can be latched and persist \u2014 diagnostic mechanisms differ accordingly."
+    ],
+    "probes": [
+      "Which fault type is harder to catch with a single-cycle diagnostic check, and why?"
+    ],
+    "refs": [
+      "Digital design fundamentals"
+    ]
+  },
+  {
+    "id": "S02-02",
+    "day": 2,
+    "tier": "Foundation",
+    "kind": "Concept",
+    "tracks": [
+      "Digital Design"
+    ],
+    "question": "What is a clock-domain crossing (CDC) and why is it a safety-relevant hazard class rather than a rare corner case?",
+    "minutes": 6,
+    "answer": [
+      "A CDC is any signal moving between two clock domains without a common, synchronized clock edge, risking metastability if unmanaged.",
+      "Because CDCs occur systematically wherever domains meet, an unmanaged one is a predictable, recurring fault class \u2014 not a rare, unlucky event."
+    ],
+    "probes": [
+      "How would you find every CDC on a safety-relevant path across a large SoC?"
+    ],
+    "refs": [
+      "Digital design fundamentals"
+    ]
+  },
+  {
+    "id": "S02-03",
+    "day": 2,
+    "tier": "Intermediate",
+    "kind": "Concept",
+    "tracks": [
+      "Digital Design"
+    ],
+    "question": "Explain synthesis: how RTL becomes a gate-level netlist, and what safety-relevant properties must be preserved through that transformation.",
+    "minutes": 8,
+    "answer": [
+      "Synthesis maps RTL to a gate-level netlist matched to a target technology library; place-and-route then arranges and wires the gates physically.",
+      "Functional equivalence and timing behavior of safety-relevant logic must be preserved and evidenced through this transformation, not assumed."
+    ],
+    "probes": [
+      "What kind of evidence would demonstrate that synthesis preserved a safety mechanism's intended behavior?"
+    ],
+    "refs": [
+      "ISO 26262-8:2018 tool confidence"
+    ]
+  },
+  {
+    "id": "S02-04",
+    "day": 2,
+    "tier": "Advanced",
+    "kind": "Debugging",
+    "tracks": [
+      "Digital Design"
+    ],
+    "question": "A synchronizer flip-flop chain on a safety-relevant flag is specified as 2-stage instead of 3-stage. What risk does this raise and how do you evaluate it?",
+    "minutes": 10,
+    "answer": [
+      "A shorter synchronizer gives less time for a metastable state to resolve, raising the probability of a metastable value propagating downstream.",
+      "Evaluate via a mean-time-between-failure-due-to-metastability calculation against the target frequency and required reliability, not by inspection alone."
+    ],
+    "probes": [
+      "At what point would you require a 3rd stage rather than accepting the calculated MTBF as sufficient?"
+    ],
+    "refs": [
+      "Digital design fundamentals"
+    ]
+  },
+  {
+    "id": "S02-05",
+    "day": 2,
+    "tier": "Advanced",
+    "kind": "Analysis",
+    "tracks": [
+      "Digital Design"
+    ],
+    "question": "Explain the dual role of scan chains and DFT structures as both manufacturing test and functional-safety diagnostic mechanisms.",
+    "minutes": 10,
+    "answer": [
+      "Scan chains inserted for manufacturing test can be reused to run periodic logic built-in self-test (LBIST) as a functional-safety diagnostic.",
+      "This dual role means DFT insertion decisions cannot be made without safety architecture input, since removing or altering scan structures for test-cost reasons can silently remove a safety mechanism."
+    ],
+    "probes": [
+      "When would you run LBIST only at power-up versus periodically during operation, and why?"
+    ],
+    "refs": [
+      "ISO 26262-5:2018 hardware architectural metrics"
+    ]
+  },
+  {
+    "id": "S02-06",
+    "day": 2,
+    "tier": "Advanced",
+    "kind": "Analysis",
+    "tracks": [
+      "Digital Design"
+    ],
+    "question": "A safety-relevant signal is combined with a non-safety signal in shared combinational logic before synthesis. What architecture concern does this raise?",
+    "minutes": 10,
+    "answer": [
+      "It raises a freedom-from-interference concern at the gate level: the non-safety input could corrupt or mask the safety-relevant signal's behavior.",
+      "The concern needs either physical separation, a documented and verified isolation argument, or reclassification of the shared logic to the higher integrity level."
+    ],
+    "probes": [
+      "How is this the gate-level analogue of a software freedom-from-interference argument?"
+    ],
+    "refs": [
+      "ISO 26262-6:2018 freedom from interference"
+    ]
+  },
+  {
+    "id": "S02-07",
+    "day": 2,
+    "tier": "Advanced",
+    "kind": "Technical management",
+    "tracks": [
+      "Digital Design",
+      "Role Scenarios"
+    ],
+    "question": "Digital design and DFT teams are organizationally separate from functional safety. How do you build a working interface between them?",
+    "minutes": 11,
+    "answer": [
+      "Establish shared review gates where DFT insertion decisions are checked against the safety diagnostic-coverage plan before they are finalized.",
+      "Give each team visibility into how their decisions affect the other's evidence, rather than treating DFT as a downstream, safety-unaware step."
+    ],
+    "probes": [
+      "What single artifact would you make both teams jointly own to force this interface to actually happen?"
+    ],
+    "refs": [
+      "ISO 26262-2:2018 safety management"
+    ]
+  },
+  {
+    "id": "S02-08",
+    "day": 2,
+    "tier": "Advanced",
+    "kind": "Certification scenario",
+    "tracks": [
+      "Digital Design",
+      "Role Scenarios"
+    ],
+    "question": "An assessor asks you to demonstrate that synthesis and place-and-route tools did not alter safety-relevant logic behavior. What evidence do you present?",
+    "minutes": 11,
+    "answer": [
+      "Equivalence-checking results between RTL and the gate-level netlist, plus a tool-confidence argument for the synthesis and place-and-route tools used.",
+      "Where equivalence checking has known limitations (e.g., certain timing-dependent behaviors), document those limitations and how they were separately addressed."
+    ],
+    "probes": [
+      "What would you do if equivalence checking passed but you still had residual doubt about a specific safety path?"
+    ],
+    "refs": [
+      "ISO 26262-8:2018 tool confidence"
+    ]
+  },
+  {
+    "id": "S02-09",
+    "day": 2,
+    "tier": "Advanced",
+    "kind": "Customer integration scenario",
+    "tracks": [
+      "Digital Design",
+      "Role Scenarios"
+    ],
+    "question": "A customer's synthesis flow reports timing violations on your delivered RTL that your own flow does not. How do you resolve responsibility and safety impact?",
+    "minutes": 11,
+    "answer": [
+      "Compare constraint sets, technology libraries and tool versions between the two flows to isolate whether the discrepancy is environmental or a genuine design margin issue.",
+      "Until resolved, treat the safety-relevant paths conservatively rather than assuming your own flow's clean result is automatically authoritative."
+    ],
+    "probes": [
+      "What would change your assessment from \u201ctooling difference\u201d to \u201cgenuine design margin gap\u201d?"
+    ],
+    "refs": [
+      "Digital design fundamentals"
+    ]
+  },
+  {
+    "id": "S02-10",
+    "day": 2,
+    "tier": "Expert",
+    "kind": "Engineering lead scenario",
+    "tracks": [
+      "Digital Design",
+      "Role Scenarios"
+    ],
+    "question": "How do you build shared vocabulary between RTL designers and functional safety engineers who have historically worked in silos?",
+    "minutes": 13,
+    "answer": [
+      "Create joint review forums where each side explains its artifacts to the other in plain terms, not just circulates documents for signoff.",
+      "Invest early in a small number of engineers who deliberately sit across both disciplines, since they become the translation layer the rest of the team learns from."
+    ],
+    "probes": [
+      "What early misunderstanding between the two groups would you specifically watch for as a warning sign?"
+    ],
+    "refs": [
+      "ISO 26262-2:2018 safety management"
+    ]
+  },
+  {
+    "id": "S03-01",
+    "day": 3,
+    "tier": "Foundation",
+    "kind": "Concept",
+    "tracks": [
+      "Design Flow & Lifecycle"
+    ],
+    "question": "List the major phases of an ASIC/SoC design flow from specification to production, and name one safety work product per phase.",
+    "minutes": 7,
+    "answer": [
+      "Specification, RTL implementation, RTL verification, synthesis, DFT insertion, physical design, tapeout, silicon bring-up, characterization, production.",
+      "Example work products: safety requirements (spec), FMEDA (verification/synthesis), diagnostic-coverage evidence (DFT), safety manual (production)."
+    ],
+    "probes": [
+      "Which phase's work product would be hardest to redo cheaply if a gap were found two phases later?"
+    ],
+    "refs": [
+      "ISO 26262-11:2018"
+    ]
+  },
+  {
+    "id": "S03-02",
+    "day": 3,
+    "tier": "Foundation",
+    "kind": "Concept",
+    "tracks": [
+      "Design Flow & Lifecycle"
+    ],
+    "question": "What is tapeout, and why is it treated as a hard, largely irreversible configuration-control gate?",
+    "minutes": 6,
+    "answer": [
+      "Tapeout is the handoff of a finalized design to mask generation and fabrication.",
+      "Because mask sets are expensive and slow to produce, defects found afterward cannot simply be recompiled and redeployed the way software can."
+    ],
+    "probes": [
+      "What options remain if a defect is found after tapeout but before mass production silicon?"
+    ],
+    "refs": [
+      "ISO 26262-8:2018 configuration management"
+    ]
+  },
+  {
+    "id": "S03-03",
+    "day": 3,
+    "tier": "Intermediate",
+    "kind": "Analysis",
+    "tracks": [
+      "Design Flow & Lifecycle"
+    ],
+    "question": "How does configuration management differ for RTL/IP compared to vehicle ECU software, given IP reuse across projects and metal-fix versus full-respin options?",
+    "minutes": 9,
+    "answer": [
+      "RTL/IP configuration management must track exactly which RTL, netlist, physical-design and DFT baseline maps to which fabricated silicon revision, across potentially many reusing projects.",
+      "Post-fabrication fixes are constrained to metal-layer ECOs, documented errata with mitigation, or full respin \u2014 options with no direct software equivalent."
+    ],
+    "probes": [
+      "What would go wrong if a reusing project used the wrong IP baseline without realizing it?"
+    ],
+    "refs": [
+      "ISO 26262-8:2018 configuration management"
+    ]
+  },
+  {
+    "id": "S03-04",
+    "day": 3,
+    "tier": "Advanced",
+    "kind": "Analysis",
+    "tracks": [
+      "Design Flow & Lifecycle"
+    ],
+    "question": "A critical safety-mechanism bug is found after tapeout but before mass production silicon. What are the options and their safety implications?",
+    "minutes": 12,
+    "answer": [
+      "A metal-layer engineering change order (ECO) if the fix can be achieved by rewiring existing transistors; otherwise documented errata plus a system or software-level mitigation, or a full respin.",
+      "Each option has a different residual-risk and schedule profile, and the safety case must be updated to reflect whichever path is chosen, not just the original design intent."
+    ],
+    "probes": [
+      "What would make an errata-plus-mitigation approach unacceptable even though it avoids a costly respin?"
+    ],
+    "refs": [
+      "ISO 26262-8:2018 configuration management"
+    ]
+  },
+  {
+    "id": "S03-05",
+    "day": 3,
+    "tier": "Advanced",
+    "kind": "Analysis",
+    "tracks": [
+      "Design Flow & Lifecycle"
+    ],
+    "question": "How do you plan safety-relevant reviews and gate criteria across a design flow with long, expensive, irreversible phases like tapeout?",
+    "minutes": 11,
+    "answer": [
+      "Place the hardest, most consequential safety reviews before tapeout specifically, with named, non-negotiable acceptance criteria rather than best-effort review.",
+      "Build schedule margin around those pre-tapeout gates deliberately, since compressing them under deadline pressure is the single highest-risk failure mode in this lifecycle."
+    ],
+    "probes": [
+      "What would you do if a physical-design deadline and a safety-review completion date became mutually incompatible?"
+    ],
+    "refs": [
+      "ISO 26262-2:2018 safety management"
+    ]
+  },
+  {
+    "id": "S03-06",
+    "day": 3,
+    "tier": "Advanced",
+    "kind": "Analysis",
+    "tracks": [
+      "Design Flow & Lifecycle"
+    ],
+    "question": "Explain the relationship between the safety plan and the design/verification schedule when a customer's start-of-production date is fixed.",
+    "minutes": 10,
+    "answer": [
+      "The safety plan must be built around protecting review quality under a schedule that will not move, rather than assuming slack will materialize.",
+      "This typically means front-loading safety-critical decisions and reviews earlier in the flow than schedule pressure alone would suggest."
+    ],
+    "probes": [
+      "What early signal would tell you the fixed SOP date is about to force an unsafe compromise?"
+    ],
+    "refs": [
+      "ISO 26262-2:2018 safety management"
+    ]
+  },
+  {
+    "id": "S03-07",
+    "day": 3,
+    "tier": "Advanced",
+    "kind": "Technical management",
+    "tracks": [
+      "Design Flow & Lifecycle",
+      "Role Scenarios"
+    ],
+    "question": "A physical-design deadline threatens to compress the safety review before tapeout. How do you protect the safety gate without derailing the program?",
+    "minutes": 12,
+    "answer": [
+      "Make the trade-off explicit and visible to program management as a schedule-versus-safety-evidence decision, rather than letting the review quietly shrink.",
+      "Look for genuine schedule recovery elsewhere in the flow before accepting any compression of the safety-critical gate itself."
+    ],
+    "probes": [
+      "What would you do if program management insisted on compressing the review anyway?"
+    ],
+    "refs": [
+      "ISO 26262-2:2018 safety management"
+    ]
+  },
+  {
+    "id": "S03-08",
+    "day": 3,
+    "tier": "Advanced",
+    "kind": "Certification scenario",
+    "tracks": [
+      "Design Flow & Lifecycle",
+      "Role Scenarios"
+    ],
+    "question": "An assessor wants to see how errata discovered post-tapeout are tracked and communicated to downstream safety cases. What process do you show them?",
+    "minutes": 11,
+    "answer": [
+      "An errata log with safety-relevance classification for each entry, linked to the affected safety mechanism and any required mitigation.",
+      "A defined communication path from errata discovery to customer notification, so downstream safety cases are updated rather than silently left stale."
+    ],
+    "probes": [
+      "What would make an assessor conclude your errata process is inadequate even if every individual errata entry looks correct?"
+    ],
+    "refs": [
+      "ISO 26262-8:2018 configuration management"
+    ]
+  },
+  {
+    "id": "S03-09",
+    "day": 3,
+    "tier": "Advanced",
+    "kind": "Customer integration scenario",
+    "tracks": [
+      "Design Flow & Lifecycle",
+      "Role Scenarios"
+    ],
+    "question": "A customer needs your chip's errata list translated into \u201cdoes this affect my safety goal\u201d guidance. How do you structure that communication?",
+    "minutes": 11,
+    "answer": [
+      "Map each errata entry to the specific safety mechanisms and Assumptions of Use it could affect, not just describe the defect technically.",
+      "Provide a clear yes/no/conditional safety-relevance verdict per entry, with the reasoning, rather than leaving the customer to interpret raw technical errata."
+    ],
+    "probes": [
+      "What would you do if an errata entry's safety relevance genuinely depended on the customer's specific integration, which you don't have full visibility into?"
+    ],
+    "refs": [
+      "ISO 26262-11:2018"
+    ]
+  },
+  {
+    "id": "S03-10",
+    "day": 3,
+    "tier": "Expert",
+    "kind": "Engineering lead scenario",
+    "tracks": [
+      "Design Flow & Lifecycle",
+      "Role Scenarios"
+    ],
+    "question": "How do you lead a cross-site team spanning design, DFT, verification and physical design through a safety-critical tapeout milestone?",
+    "minutes": 14,
+    "answer": [
+      "Establish a single shared view of outstanding safety-relevant items across all sites, so no site can locally believe an item is closed when it isn't.",
+      "Run the final pre-tapeout gate as a joint, synchronous review rather than a rolling sign-off collected asynchronously across time zones."
+    ],
+    "probes": [
+      "What communication failure mode is most likely across sites, and how would you specifically guard against it?"
+    ],
+    "refs": [
+      "ISO 26262-2:2018 safety management"
+    ]
+  },
+  {
+    "id": "S04-01",
+    "day": 4,
+    "tier": "Foundation",
+    "kind": "Concept",
+    "tracks": [
+      "RTL Verification"
+    ],
+    "question": "Differentiate RTL simulation, formal verification and emulation as verification methods, and note what each is strong and weak at.",
+    "minutes": 7,
+    "answer": [
+      "Simulation exercises directed/constrained-random scenarios over time and is only as good as the scenarios devised; formal verification proves properties hold for all input sequences within its model, strong at rare corner cases.",
+      "Emulation runs the design on FPGA hardware near real-time, useful for software bring-up and long-running scenarios simulation cannot afford, but weaker at fine-grained internal visibility."
+    ],
+    "probes": [
+      "Which method would you reach for first to find a rare, hard-to-reproduce corner case?"
+    ],
+    "refs": [
+      "RTL verification fundamentals"
+    ]
+  },
+  {
+    "id": "S04-02",
+    "day": 4,
+    "tier": "Foundation",
+    "kind": "Concept",
+    "tracks": [
+      "RTL Verification"
+    ],
+    "question": "What is functional coverage, and why is 100% code coverage insufficient as safety evidence?",
+    "minutes": 7,
+    "answer": [
+      "Functional coverage measures whether meaningful scenarios occurred, not just whether lines or branches executed.",
+      "Code coverage can reach 100% while a specific safety mechanism's fault-detecting behavior is never actually exercised by any test."
+    ],
+    "probes": [
+      "What coverage metric would specifically catch an unexercised safety-mechanism path that code coverage misses?"
+    ],
+    "refs": [
+      "ISO 26262-8:2018 verification"
+    ]
+  },
+  {
+    "id": "S04-03",
+    "day": 4,
+    "tier": "Intermediate",
+    "kind": "Concept",
+    "tracks": [
+      "RTL Verification"
+    ],
+    "question": "Explain what a SystemVerilog Assertion (SVA) checks and how it supports safety-relevant property verification.",
+    "minutes": 9,
+    "answer": [
+      "An SVA formally states a property the design must satisfy (e.g., \u2018a fault flag asserts within N cycles of an injected fault\u2019) and can be checked by simulation or formal tools.",
+      "Because it states the property explicitly and independently of any specific test scenario, it can be checked against far more input sequences than a directed test would cover."
+    ],
+    "probes": [
+      "What would make a well-written SVA more valuable as safety evidence than an equivalent directed test?"
+    ],
+    "refs": [
+      "RTL verification fundamentals"
+    ]
+  },
+  {
+    "id": "S04-04",
+    "day": 4,
+    "tier": "Advanced",
+    "kind": "Debugging",
+    "tracks": [
+      "RTL Verification"
+    ],
+    "question": "A safety mechanism passes all directed tests, but a formal proof finds a corner case where it fails to flag a fault. How do you reconcile \u201cpassed testing\u201d with the formal counterexample?",
+    "minutes": 11,
+    "answer": [
+      "Treat the formal counterexample as the authoritative finding \u2014 it demonstrates an actual failure mode the directed tests simply never reached.",
+      "Investigate why the directed test suite missed this case, since the same testbench design gap likely hides other unverified corner cases too."
+    ],
+    "probes": [
+      "What would you do if reproducing the formal counterexample in simulation proved surprisingly difficult?"
+    ],
+    "refs": [
+      "RTL verification fundamentals"
+    ]
+  },
+  {
+    "id": "S04-05",
+    "day": 4,
+    "tier": "Advanced",
+    "kind": "Design",
+    "tracks": [
+      "RTL Verification"
+    ],
+    "question": "Design a verification strategy for confirming a memory ECC mechanism correctly detects and, where required, corrects single- and double-bit errors.",
+    "minutes": 12,
+    "answer": [
+      "Combine formal proofs of the ECC encode/decode logic's correctness across the full error-pattern space with targeted fault-injection tests exercising realistic access patterns.",
+      "Explicitly verify the boundary behavior \u2014 what happens on an error pattern beyond the code's correction/detection capability \u2014 not just the in-spec cases."
+    ],
+    "probes": [
+      "How would you verify the mechanism's behavior on an error pattern the code was never designed to handle?"
+    ],
+    "refs": [
+      "ISO 26262-5:2018 hardware architectural metrics"
+    ]
+  },
+  {
+    "id": "S04-06",
+    "day": 4,
+    "tier": "Advanced",
+    "kind": "Debugging",
+    "tracks": [
+      "RTL Verification"
+    ],
+    "question": "A UVM testbench for a safety IP block reports high coverage, but a customer's integration finds a bug in reset behavior. What verification gap does this suggest?",
+    "minutes": 11,
+    "answer": [
+      "Reset behavior is often under-covered because it is a transient, edge-of-scenario condition that constrained-random testing naturally under-samples.",
+      "The gap suggests the verification plan needs explicit, directed reset and power-up/power-down scenarios rather than relying on coverage metrics to surface them incidentally."
+    ],
+    "probes": [
+      "What other transient conditions are typically as under-covered as reset, for the same reason?"
+    ],
+    "refs": [
+      "RTL verification fundamentals"
+    ]
+  },
+  {
+    "id": "S04-07",
+    "day": 4,
+    "tier": "Advanced",
+    "kind": "Technical management",
+    "tracks": [
+      "RTL Verification",
+      "Role Scenarios"
+    ],
+    "question": "Verification effort is split between functional correctness and safety-mechanism verification. How do you plan and staff both without one crowding out the other?",
+    "minutes": 12,
+    "answer": [
+      "Track them as separate, explicitly budgeted work streams with their own coverage goals, rather than one implicit sub-task of the other.",
+      "Staff at least some engineers specifically toward safety-mechanism verification, since it is otherwise the stream most likely to be deprioritized under schedule pressure."
+    ],
+    "probes": [
+      "What early sign would tell you safety-mechanism verification is silently losing resources to functional verification?"
+    ],
+    "refs": [
+      "ISO 26262-2:2018 safety management"
+    ]
+  },
+  {
+    "id": "S04-08",
+    "day": 4,
+    "tier": "Advanced",
+    "kind": "Certification scenario",
+    "tracks": [
+      "RTL Verification",
+      "Role Scenarios"
+    ],
+    "question": "An assessor asks how you distinguish verifying that a design works from verifying that a fault is correctly detected and reacted to. Explain the distinction and your evidence.",
+    "minutes": 11,
+    "answer": [
+      "Functional verification confirms correct behavior under healthy conditions; safety-mechanism verification confirms correct detection and reaction under deliberately injected fault conditions \u2014 two different test intents.",
+      "Present separate coverage evidence for each: functional/code coverage for the former, fault-injection and safety-mechanism-triggering coverage for the latter."
+    ],
+    "probes": [
+      "What would make an assessor doubt that this distinction was genuinely applied rather than described after the fact?"
+    ],
+    "refs": [
+      "ISO 26262-8:2018 verification"
+    ]
+  },
+  {
+    "id": "S04-09",
+    "day": 4,
+    "tier": "Advanced",
+    "kind": "Customer integration scenario",
+    "tracks": [
+      "RTL Verification",
+      "Role Scenarios"
+    ],
+    "question": "A customer asks for your RTL verification coverage report as part of their own safety case. What can you share, and what stays proprietary?",
+    "minutes": 11,
+    "answer": [
+      "Share coverage summaries, safety-mechanism verification evidence and methodology sufficient for their safety case, without exposing proprietary RTL or testbench source.",
+      "Where the customer needs more traceability than a summary provides, offer a structured evidence package rather than raw source access."
+    ],
+    "probes": [
+      "What would you do if the customer's assessor insisted on seeing underlying testbench source itself?"
+    ],
+    "refs": [
+      "ISO 26262-8:2018 supplier interfaces"
+    ]
+  },
+  {
+    "id": "S04-10",
+    "day": 4,
+    "tier": "Expert",
+    "kind": "Engineering lead scenario",
+    "tracks": [
+      "RTL Verification",
+      "Role Scenarios"
+    ],
+    "question": "How do you grow verification engineers into functional-safety-capable reviewers without duplicating an entire second verification team?",
+    "minutes": 13,
+    "answer": [
+      "Pair verification engineers with safety engineers on real safety-mechanism verification tasks rather than teaching the discipline abstractly first.",
+      "Build a small set of reusable safety-verification patterns and checklists the wider verification team can apply, rather than requiring every engineer to independently rediscover the discipline."
+    ],
+    "probes": [
+      "What would tell you this growth strategy was working versus just producing engineers who can recite the vocabulary?"
+    ],
+    "refs": [
+      "ISO 26262-2:2018 safety management"
+    ]
+  },
+  {
+    "id": "S05-01",
+    "day": 5,
+    "tier": "Foundation",
+    "kind": "Concept",
+    "tracks": [
+      "Fault Injection & Analysis"
+    ],
+    "question": "Define stuck-at, transition and bridging fault models used in gate-level fault simulation.",
+    "minutes": 6,
+    "answer": [
+      "A stuck-at fault fixes a node permanently high or low; a transition fault models a delay defect that only shows up at speed; a bridging fault models an unintended short between two nodes.",
+      "These are idealized abstractions standing in for the much larger space of real physical defects, chosen because they are tractable to simulate at scale."
+    ],
+    "probes": [
+      "Which of these three fault models would a purely functional (non-timing) simulation fail to catch?"
+    ],
+    "refs": [
+      "ISO 26262-5:2018 hardware architectural metrics"
+    ]
+  },
+  {
+    "id": "S05-02",
+    "day": 5,
+    "tier": "Foundation",
+    "kind": "Concept",
+    "tracks": [
+      "Fault Injection & Analysis"
+    ],
+    "question": "What is a single-event upset (SEU), and why does it matter for automotive silicon even outside radiation-heavy environments?",
+    "minutes": 6,
+    "answer": [
+      "An SEU is a transient bit-flip caused by cosmic radiation or alpha particles from package materials, not a permanent physical defect.",
+      "Even at ground level, SEU rates are non-negligible for safety-critical memory and logic, especially at smaller process nodes, so they are analyzed as a distinct soft-error risk."
+    ],
+    "probes": [
+      "Why is an SEU typically analyzed separately from stuck-at-style permanent fault models?"
+    ],
+    "refs": [
+      "ISO 26262-5:2018 hardware architectural metrics"
+    ]
+  },
+  {
+    "id": "S05-03",
+    "day": 5,
+    "tier": "Intermediate",
+    "kind": "Concept",
+    "tracks": [
+      "Fault Injection & Analysis"
+    ],
+    "question": "Explain the purpose of an IP-block-level FMEDA and how it differs from a system-level FMEA.",
+    "minutes": 8,
+    "answer": [
+      "An FMEDA walks the block's failure modes, classifies each as safe, single-point, residual or dual-point, and derives diagnostic coverage per mechanism \u2014 producing quantified metrics, not just qualitative descriptions.",
+      "It operates on gates and registers rather than components, at a level of precision a system-level FMEA does not attempt."
+    ],
+    "probes": [
+      "What would a system-level FMEA miss that an IP-block FMEDA is specifically built to capture?"
+    ],
+    "refs": [
+      "ISO 26262-5:2018 hardware architectural metrics"
+    ]
+  },
+  {
+    "id": "S05-04",
+    "day": 5,
+    "tier": "Advanced",
+    "kind": "Design",
+    "tracks": [
+      "Fault Injection & Analysis"
+    ],
+    "question": "Design a fault-injection campaign to substantiate a diagnostic-coverage claim for an ECC-protected memory.",
+    "minutes": 12,
+    "answer": [
+      "Define the fault list (e.g., single-bit, double-bit, address-decode faults) and sampling strategy across realistic access patterns, then inject and observe whether the ECC mechanism detects/corrects as claimed.",
+      "Include rarely-exercised states (e.g., specific address ranges, boundary conditions) explicitly, since these are exactly where analytical estimates and empirical results tend to diverge."
+    ],
+    "probes": [
+      "How would you decide the campaign has run enough faults to substantiate the claim rather than just sampled it thinly?"
+    ],
+    "refs": [
+      "ISO 26262-5:2018 hardware architectural metrics"
+    ]
+  },
+  {
+    "id": "S05-05",
+    "day": 5,
+    "tier": "Advanced",
+    "kind": "Debugging",
+    "tracks": [
+      "Fault Injection & Analysis"
+    ],
+    "question": "A saboteur-based fault-injection campaign shows lower diagnostic coverage than the analytical FMEDA estimate. How do you reconcile the discrepancy?",
+    "minutes": 11,
+    "answer": [
+      "Identify which fault classes or design states the analytical model over-estimated coverage for, typically under-sampled or rarely-exercised paths.",
+      "Treat the empirical result as the one requiring the analytical model to be revised, not the other way around, unless the campaign itself has a demonstrable flaw."
+    ],
+    "probes": [
+      "What campaign design flaw could produce an artificially low empirical result instead of a genuine coverage gap?"
+    ],
+    "refs": [
+      "ISO 26262-5:2018 hardware architectural metrics"
+    ]
+  },
+  {
+    "id": "S05-06",
+    "day": 5,
+    "tier": "Advanced",
+    "kind": "Analysis",
+    "tracks": [
+      "Fault Injection & Analysis"
+    ],
+    "question": "How do you classify faults as safe, single-point, residual, or dual-point (perceived/detected/latent) at the gate level, and why does this classification drive SPFM/LFM?",
+    "minutes": 11,
+    "answer": [
+      "Classification depends on whether a fault alone can violate a safety goal, and if so, whether a diagnostic mechanism detects it and within what timing \u2014 this directly determines which metric bucket the fault falls into.",
+      "SPFM and LFM are computed from the proportion of faults in each classification bucket, so an inaccurate classification directly produces an inaccurate metric."
+    ],
+    "probes": [
+      "What would cause a fault to be misclassified as \u2018safe\u2019 when it actually is not?"
+    ],
+    "refs": [
+      "ISO 26262-5:2018 hardware architectural metrics"
+    ]
+  },
+  {
+    "id": "S05-07",
+    "day": 5,
+    "tier": "Advanced",
+    "kind": "Technical management",
+    "tracks": [
+      "Fault Injection & Analysis",
+      "Role Scenarios"
+    ],
+    "question": "Fault-injection campaigns are compute-intensive and schedule-heavy. How do you prioritize which blocks and faults get simulated versus sampled versus analytically estimated?",
+    "minutes": 12,
+    "answer": [
+      "Prioritize by ASIL and by how much the block's claimed diagnostic coverage depends on empirical substantiation versus well-established design patterns.",
+      "Use targeted sampling and analytical estimation for lower-risk or well-understood mechanisms, reserving full campaigns for novel or highest-ASIL mechanisms."
+    ],
+    "probes": [
+      "What would make you override this prioritization and fully campaign a block you'd otherwise have sampled?"
+    ],
+    "refs": [
+      "ISO 26262-2:2018 safety management"
+    ]
+  },
+  {
+    "id": "S05-08",
+    "day": 5,
+    "tier": "Advanced",
+    "kind": "Certification scenario",
+    "tracks": [
+      "Fault Injection & Analysis",
+      "Role Scenarios"
+    ],
+    "question": "An assessor challenges an FMEDA's optimistic diagnostic-coverage assumption for a rarely-exercised state. How do you defend or revise it?",
+    "minutes": 11,
+    "answer": [
+      "If the assumption has campaign or analytical evidence behind it, present that evidence directly; if it does not, treat the finding as valid and revise the coverage claim.",
+      "Avoid defending an assumption on the basis that it is \u2018standard practice\u2019 without evidence specific to this design."
+    ],
+    "probes": [
+      "What would distinguish a legitimate optimistic assumption from an unjustified one in this conversation?"
+    ],
+    "refs": [
+      "ISO 26262-5:2018 hardware architectural metrics"
+    ]
+  },
+  {
+    "id": "S05-09",
+    "day": 5,
+    "tier": "Advanced",
+    "kind": "Customer integration scenario",
+    "tracks": [
+      "Fault Injection & Analysis",
+      "Role Scenarios"
+    ],
+    "question": "A customer's own hazard analysis assumes a different fault distribution than your FMEDA. How do you reconcile the two hardware-safety analyses across the interface?",
+    "minutes": 11,
+    "answer": [
+      "Compare the underlying assumptions (mission profile, environment, fault model) driving each distribution to find the actual source of disagreement.",
+      "Where the customer's assumptions are more conservative or more applicable to their specific use, update your FMEDA's applicability statement rather than insisting your original assumptions were correct."
+    ],
+    "probes": [
+      "What would you do if the two distributions couldn't be reconciled without one side changing their published metric?"
+    ],
+    "refs": [
+      "ISO 26262-11:2018"
+    ]
+  },
+  {
+    "id": "S05-10",
+    "day": 5,
+    "tier": "Expert",
+    "kind": "Engineering lead scenario",
+    "tracks": [
+      "Fault Injection & Analysis",
+      "Role Scenarios"
+    ],
+    "question": "How do you build an in-house fault-injection and FMEDA capability rather than depending entirely on external tools and vendors?",
+    "minutes": 13,
+    "answer": [
+      "Start by building deep competence in a small number of representative blocks rather than trying to cover the whole portfolio immediately.",
+      "Invest in reusable internal fault-injection infrastructure and a documented FMEDA methodology the team can apply consistently across future IP, not just a one-off analysis."
+    ],
+    "probes": [
+      "What would tell you this in-house capability was mature enough to reduce, rather than merely supplement, external dependency?"
+    ],
+    "refs": [
+      "ISO 26262-2:2018 safety management"
+    ]
+  },
+  {
+    "id": "S06-01",
+    "day": 6,
+    "tier": "Foundation",
+    "kind": "Concept",
+    "tracks": [
+      "Lockstep & Redundancy"
+    ],
+    "question": "Explain how a dual-core lockstep architecture detects a fault, and what the comparator is actually comparing.",
+    "minutes": 6,
+    "answer": [
+      "Two cores execute the same instruction stream in parallel, and a comparator continuously checks that their outputs, or a checksum of internal state, match.",
+      "A mismatch between the two cores' compared outputs flags a fault, without necessarily identifying which core is wrong."
+    ],
+    "probes": [
+      "Why can't a simple two-core lockstep comparator, by itself, tell you which of the two cores is faulty?"
+    ],
+    "refs": [
+      "ISO 26262-5:2018 hardware architectural metrics"
+    ]
+  },
+  {
+    "id": "S06-02",
+    "day": 6,
+    "tier": "Foundation",
+    "kind": "Concept",
+    "tracks": [
+      "Lockstep & Redundancy"
+    ],
+    "question": "What does delayed lockstep add over simple lockstep, and what common-cause failure does it mitigate?",
+    "minutes": 7,
+    "answer": [
+      "Delayed lockstep staggers the second core's clock by a small number of cycles relative to the first.",
+      "This reduces the chance that a transient disturbance affecting both cores at the same physical instant corrupts both cores' state identically at the moment of comparison."
+    ],
+    "probes": [
+      "What kind of disturbance would delayed lockstep specifically help with that simple lockstep would not?"
+    ],
+    "refs": [
+      "ISO 26262-5:2018 hardware architectural metrics"
+    ]
+  },
+  {
+    "id": "S06-03",
+    "day": 6,
+    "tier": "Intermediate",
+    "kind": "Concept",
+    "tracks": [
+      "Lockstep & Redundancy"
+    ],
+    "question": "Compare lockstep and Triple Modular Redundancy (TMR) as diagnostic architectures in terms of cost, latency and applicability.",
+    "minutes": 9,
+    "answer": [
+      "Lockstep detects a mismatch (roughly 2x area cost) but generally cannot mask it without additional recovery logic; TMR votes among three instances (roughly 3x area cost) and can mask a single fault outright.",
+      "The choice depends on whether the application needs detect-and-degrade behavior or continuous fault-masked operation, and how much area/power budget is available."
+    ],
+    "probes": [
+      "In which kind of application would TMR's extra cost clearly be worth it over lockstep?"
+    ],
+    "refs": [
+      "ISO 26262-5:2018 hardware architectural metrics"
+    ]
+  },
+  {
+    "id": "S06-04",
+    "day": 6,
+    "tier": "Advanced",
+    "kind": "Analysis",
+    "tracks": [
+      "Lockstep & Redundancy"
+    ],
+    "question": "Two lockstep cores share the same clock and power supply. What independence claim can and cannot be made, and what analysis is needed?",
+    "minutes": 11,
+    "answer": [
+      "Independence from faults specific to each core's logic can be claimed; independence from a shared clock-glitch or supply-droop event cannot be claimed without further analysis or mitigation.",
+      "A common-cause-failure analysis of the shared clock and power distribution is needed before any independence claim covering those resources is credible."
+    ],
+    "probes": [
+      "What mitigation, short of fully separate clock/power domains, could close this gap?"
+    ],
+    "refs": [
+      "ISO 26262-9:2018 dependent failure analysis"
+    ]
+  },
+  {
+    "id": "S06-05",
+    "day": 6,
+    "tier": "Advanced",
+    "kind": "Design",
+    "tracks": [
+      "Lockstep & Redundancy"
+    ],
+    "question": "Design a diagnostic concept for detecting comparator-logic faults themselves \u2014 who checks the checker?",
+    "minutes": 11,
+    "answer": [
+      "Add a periodic self-test of the comparator logic itself, or implement the comparison via a diverse, independently-designed second path.",
+      "Ensure the self-check runs frequently enough relative to the safety-relevant fault-tolerant time interval, not just at power-up."
+    ],
+    "probes": [
+      "What would make a periodic self-test insufficient, requiring a diverse comparison path instead?"
+    ],
+    "refs": [
+      "ISO 26262-5:2018 hardware architectural metrics"
+    ]
+  },
+  {
+    "id": "S06-06",
+    "day": 6,
+    "tier": "Advanced",
+    "kind": "Analysis",
+    "tracks": [
+      "Lockstep & Redundancy"
+    ],
+    "question": "Explain LBIST's role as a diagnostic mechanism versus a manufacturing-test mechanism, including power-up-only versus periodic timing trade-offs.",
+    "minutes": 10,
+    "answer": [
+      "LBIST (logic built-in self-test) run at manufacturing verifies the device is defect-free at production; the same infrastructure run at power-up or periodically in-field serves as a functional-safety diagnostic for latent faults.",
+      "Power-up-only LBIST catches faults present at startup but misses faults developing during operation; periodic in-field LBIST catches more but costs availability time each time it runs."
+    ],
+    "probes": [
+      "How would you decide the right periodic LBIST interval for a latent fault with a known diagnostic test interval requirement?"
+    ],
+    "refs": [
+      "ISO 26262-5:2018 hardware architectural metrics"
+    ]
+  },
+  {
+    "id": "S06-07",
+    "day": 6,
+    "tier": "Advanced",
+    "kind": "Technical management",
+    "tracks": [
+      "Lockstep & Redundancy",
+      "Role Scenarios"
+    ],
+    "question": "A safety-island architecture (lockstep core plus independent monitor plus watchdog) is proposed late in the design cycle. How do you assess the schedule and verification impact of adding it?",
+    "minutes": 12,
+    "answer": [
+      "Estimate the incremental verification burden specifically for the new safety mechanisms, not just the area/timing impact on the core design.",
+      "Weigh the schedule impact against the alternative \u2014 shipping without the safety island \u2014 as an explicit risk trade-off for program management, not a purely technical decision."
+    ],
+    "probes": [
+      "What would make you recommend against adding it despite the safety benefit, given the schedule position?"
+    ],
+    "refs": [
+      "ISO 26262-2:2018 safety management"
+    ]
+  },
+  {
+    "id": "S06-08",
+    "day": 6,
+    "tier": "Advanced",
+    "kind": "Certification scenario",
+    "tracks": [
+      "Lockstep & Redundancy",
+      "Role Scenarios"
+    ],
+    "question": "An assessor asks you to justify diagnostic coverage claimed for a watchdog that monitors software liveness. What silicon and software evidence is needed together?",
+    "minutes": 11,
+    "answer": [
+      "Silicon evidence that the watchdog hardware itself reliably detects a missed refresh and triggers the correct reaction; software evidence that the refresh pattern genuinely reflects the software's healthy execution, not just a periodic timer unrelated to actual liveness.",
+      "Neither piece of evidence alone is sufficient \u2014 the claim depends on both being verified together against the same fault model."
+    ],
+    "probes": [
+      "What software design mistake would make an otherwise well-designed hardware watchdog give a false sense of coverage?"
+    ],
+    "refs": [
+      "ISO 26262-6:2018 software safety requirements"
+    ]
+  },
+  {
+    "id": "S06-09",
+    "day": 6,
+    "tier": "Advanced",
+    "kind": "Customer integration scenario",
+    "tracks": [
+      "Lockstep & Redundancy",
+      "Role Scenarios"
+    ],
+    "question": "A customer wants to know exactly what your safety island monitors versus what remains their responsibility at the SoC/system level. How do you draw that boundary in the safety manual?",
+    "minutes": 11,
+    "answer": [
+      "State explicitly which fault classes and which physical/logical scope the safety island's monitors cover, and which are outside that scope by design.",
+      "Pair the boundary statement with Assumptions of Use describing what the customer must add or verify themselves at the SoC/system level."
+    ],
+    "probes": [
+      "What would you do if the customer's system-level design assumed your safety island covered something it explicitly does not?"
+    ],
+    "refs": [
+      "ISO 26262-11:2018"
+    ]
+  },
+  {
+    "id": "S06-10",
+    "day": 6,
+    "tier": "Expert",
+    "kind": "Engineering lead scenario",
+    "tracks": [
+      "Lockstep & Redundancy",
+      "Role Scenarios"
+    ],
+    "question": "As a technical lead, how do you decide between licensing an existing lockstep-capable core versus building custom redundancy logic for a new safety-critical product line?",
+    "minutes": 14,
+    "answer": [
+      "Weigh the licensed core's existing safety evidence and track record against the schedule and cost of building and independently verifying custom redundancy logic from scratch.",
+      "Factor in long-term product-line flexibility: custom logic may cost more upfront but avoid future licensing or evidence-transparency constraints a vendor's core would impose."
+    ],
+    "probes": [
+      "What licensed-core evidence gap would tip this decision toward building custom logic despite the extra cost?"
+    ],
+    "refs": [
+      "ISO 26262-2:2018 safety management"
+    ]
+  },
+  {
+    "id": "S07-01",
+    "day": 7,
+    "tier": "Foundation",
+    "kind": "Concept",
+    "tracks": [
+      "Hardware Safety Metrics"
+    ],
+    "question": "From the IP producer's side, what SPFM/LFM/PMHF inputs can only the chip vendor, not the integrator, supply?",
+    "minutes": 6,
+    "answer": [
+      "Block-level fault classification, mechanism-specific diagnostic coverage, and base failure-rate data specific to the design and process node.",
+      "The integrator can combine these with system-level data but cannot originate the block-level analysis itself."
+    ],
+    "probes": [
+      "What would happen to the metric's accuracy if the integrator tried to estimate these inputs themselves without vendor data?"
+    ],
+    "refs": [
+      "ISO 26262-5:2018 hardware architectural metrics"
+    ]
+  },
+  {
+    "id": "S07-02",
+    "day": 7,
+    "tier": "Foundation",
+    "kind": "Concept",
+    "tracks": [
+      "Hardware Safety Metrics"
+    ],
+    "question": "What is a base failure rate (BFR), and where does the underlying failure-rate data typically come from?",
+    "minutes": 6,
+    "answer": [
+      "A BFR is the underlying random-hardware-failure rate for a component or gate class before diagnostic coverage is applied.",
+      "It typically comes from industry reliability databases, foundry-supplied process reliability data, or a combination adjusted for the specific technology node and operating conditions."
+    ],
+    "probes": [
+      "Why does a BFR sourced for one process node need re-evaluation before use on a different node?"
+    ],
+    "refs": [
+      "ISO 26262-5:2018 hardware architectural metrics"
+    ]
+  },
+  {
+    "id": "S07-03",
+    "day": 7,
+    "tier": "Intermediate",
+    "kind": "Analysis",
+    "tracks": [
+      "Hardware Safety Metrics"
+    ],
+    "question": "Explain why a single global \u201cdiagnostic coverage percentage\u201d is usually a red flag rather than reassuring, from a review standpoint.",
+    "minutes": 8,
+    "answer": [
+      "A single number collapses many different fault classes, mechanisms and operating conditions into one figure, hiding which faults are included, excluded, and how each is detected.",
+      "A careful reviewer treats the number as a starting question \u2014 what's behind it \u2014 rather than a reassuring answer on its own."
+    ],
+    "probes": [
+      "What specific follow-up question would you ask immediately after seeing an unqualified coverage percentage?"
+    ],
+    "refs": [
+      "ISO 26262-5:2018 hardware architectural metrics"
+    ]
+  },
+  {
+    "id": "S07-04",
+    "day": 7,
+    "tier": "Advanced",
+    "kind": "Analysis",
+    "tracks": [
+      "Hardware Safety Metrics"
+    ],
+    "question": "A memory block's ECC gives high diagnostic coverage on paper, but the metric assumes a fault distribution that doesn't match actual foundry defect data. How do you address this?",
+    "minutes": 11,
+    "answer": [
+      "Compare the assumed fault distribution against actual foundry defect data for the specific process node and revise the coverage estimate accordingly.",
+      "Document the revised assumption and its impact on the published metric rather than leaving the original optimistic figure in the safety manual."
+    ],
+    "probes": [
+      "What would you do if foundry defect data for this specific node simply wasn't available yet?"
+    ],
+    "refs": [
+      "ISO 26262-5:2018 hardware architectural metrics"
+    ]
+  },
+  {
+    "id": "S07-05",
+    "day": 7,
+    "tier": "Advanced",
+    "kind": "Design",
+    "tracks": [
+      "Hardware Safety Metrics"
+    ],
+    "question": "Design a sensitivity analysis showing how PMHF changes under different assumptions about diagnostic test interval and repair/replacement assumptions for a component with no in-field repair.",
+    "minutes": 12,
+    "answer": [
+      "Model PMHF across a range of plausible test intervals and, since there's no in-field repair, treat the mission duration itself as the relevant exposure window rather than assuming a repair-driven steady state.",
+      "Present the result as a curve or table across the assumption range, not a single point estimate, so a customer can locate their own use case on it."
+    ],
+    "probes": [
+      "Why does the absence of in-field repair change which PMHF formula assumptions are even valid to use?"
+    ],
+    "refs": [
+      "ISO 26262-5:2018 hardware architectural metrics"
+    ]
+  },
+  {
+    "id": "S07-06",
+    "day": 7,
+    "tier": "Advanced",
+    "kind": "Analysis",
+    "tracks": [
+      "Hardware Safety Metrics"
+    ],
+    "question": "How do technology-node-specific effects change base-failure-rate assumptions between process generations?",
+    "minutes": 10,
+    "answer": [
+      "Smaller geometries can introduce different dominant failure mechanisms (e.g., different susceptibility to soft errors or specific defect types) than older, larger nodes.",
+      "A BFR carried forward unchanged from an older node to a newer one without re-evaluation risks being systematically wrong in either direction."
+    ],
+    "probes": [
+      "What node-specific failure mechanism would you specifically check for when moving to a smaller geometry?"
+    ],
+    "refs": [
+      "ISO 26262-5:2018 hardware architectural metrics"
+    ]
+  },
+  {
+    "id": "S07-07",
+    "day": 7,
+    "tier": "Advanced",
+    "kind": "Technical management",
+    "tracks": [
+      "Hardware Safety Metrics",
+      "Role Scenarios"
+    ],
+    "question": "A customer disputes your published PMHF number using their own mission profile. How do you manage this without re-deriving the entire hardware safety analysis from scratch?",
+    "minutes": 12,
+    "answer": [
+      "Provide a sensitivity table or model that lets the customer locate their own mission-profile assumptions on your existing analysis rather than starting over.",
+      "Reserve a full re-derivation for cases where the customer's assumptions reveal a genuine gap in the original analysis, not just a different valid operating point."
+    ],
+    "probes": [
+      "What would tell you this is a genuine analytical gap rather than just a different valid assumption set?"
+    ],
+    "refs": [
+      "ISO 26262-2:2018 safety management"
+    ]
+  },
+  {
+    "id": "S07-08",
+    "day": 7,
+    "tier": "Advanced",
+    "kind": "Certification scenario",
+    "tracks": [
+      "Hardware Safety Metrics",
+      "Role Scenarios"
+    ],
+    "question": "An assessor asks for traceability from your published safety-manual metrics back to the underlying FMEDA and failure-rate data. What does that evidence chain look like?",
+    "minutes": 11,
+    "answer": [
+      "A direct, documented link from each published metric figure to the specific FMEDA entries and failure-rate sources it was derived from.",
+      "If any link in that chain is missing or undocumented, treat it as a genuine gap requiring reconstruction, not an administrative inconvenience."
+    ],
+    "probes": [
+      "What would you do if the original engineer who derived a key figure had since left and left no documented derivation?"
+    ],
+    "refs": [
+      "ISO 26262-5:2018 hardware architectural metrics"
+    ]
+  },
+  {
+    "id": "S07-09",
+    "day": 7,
+    "tier": "Advanced",
+    "kind": "Customer integration scenario",
+    "tracks": [
+      "Hardware Safety Metrics",
+      "Role Scenarios"
+    ],
+    "question": "How do you help a customer correctly combine your IP-level metrics with their own SoC-level and system-level metrics without double-counting or under-counting?",
+    "minutes": 11,
+    "answer": [
+      "Clearly state your metric's scope boundary (which faults, which mechanisms) so the customer knows exactly what is and isn't already included.",
+      "Walk through the combination method with the customer directly for their first integration, rather than assuming the safety manual's written scope statement alone is sufficient."
+    ],
+    "probes": [
+      "What double-counting mistake is most common when combining IP-level and system-level metrics, in your experience?"
+    ],
+    "refs": [
+      "ISO 26262-11:2018"
+    ]
+  },
+  {
+    "id": "S07-10",
+    "day": 7,
+    "tier": "Expert",
+    "kind": "Engineering lead scenario",
+    "tracks": [
+      "Hardware Safety Metrics",
+      "Role Scenarios"
+    ],
+    "question": "How do you build organizational discipline so every metric published in a safety manual stays reproducible years after the original engineers have moved on?",
+    "minutes": 13,
+    "answer": [
+      "Require documented derivation chains and assumption records as a condition of publishing any metric, not an optional nice-to-have.",
+      "Periodically audit older published metrics against current documentation standards to catch drift before a customer or assessor finds it first."
+    ],
+    "probes": [
+      "What single process change would most reduce the risk of an unreproducible metric being published at all?"
+    ],
+    "refs": [
+      "ISO 26262-2:2018 safety management"
+    ]
+  },
+  {
+    "id": "S08-01",
+    "day": 8,
+    "tier": "Foundation",
+    "kind": "Concept",
+    "tracks": [
+      "SEooC & Safety Manuals"
+    ],
+    "question": "From the producer's side, what must an Assumptions of Use document commit to, and what happens if a customer's actual use violates it?",
+    "minutes": 6,
+    "answer": [
+      "It must state the specific conditions \u2014 external monitoring, configuration, environment \u2014 under which the element's safety claims hold.",
+      "If actual use violates an AoU, the element's safety claims no longer transfer to that integration, regardless of how rigorously the element itself was developed."
+    ],
+    "probes": [
+      "Who is responsible for detecting an AoU violation \u2014 the producer, the integrator, or both?"
+    ],
+    "refs": [
+      "ISO 26262-10:2018"
+    ]
+  },
+  {
+    "id": "S08-02",
+    "day": 8,
+    "tier": "Foundation",
+    "kind": "Concept",
+    "tracks": [
+      "SEooC & Safety Manuals"
+    ],
+    "question": "What are the core sections a semiconductor safety manual must contain to be usable by an integrator?",
+    "minutes": 6,
+    "answer": [
+      "Safety requirements and diagnostic coverage the element provides, the Assumptions of Use the integrator must satisfy, and integration guidance describing what the integrator must add.",
+      "Metrics (SPFM/LFM/PMHF or equivalent) with their scope and assumptions stated explicitly enough for another engineer to verify."
+    ],
+    "probes": [
+      "Which of these sections, if missing, would make the safety manual effectively unusable regardless of the others' quality?"
+    ],
+    "refs": [
+      "ISO 26262-11:2018"
+    ]
+  },
+  {
+    "id": "S08-03",
+    "day": 8,
+    "tier": "Intermediate",
+    "kind": "Concept",
+    "tracks": [
+      "SEooC & Safety Manuals"
+    ],
+    "question": "Why must a SEooC be developed against an assumed ASIL and assumed safety requirements, even with no specific vehicle program identified yet?",
+    "minutes": 8,
+    "answer": [
+      "Without an assumed target, the design and verification effort has no defined rigor level to work against, making the resulting element unusable for any specific future safety case.",
+      "The assumption makes development tractable in exchange for a real business and engineering risk: guessing the wrong assumed ASIL."
+    ],
+    "probes": [
+      "What happens if the assumed ASIL later proves too low for the customer who actually wants to use the element?"
+    ],
+    "refs": [
+      "ISO 26262-11:2018"
+    ]
+  },
+  {
+    "id": "S08-04",
+    "day": 8,
+    "tier": "Advanced",
+    "kind": "Design",
+    "tracks": [
+      "SEooC & Safety Manuals"
+    ],
+    "question": "Draft, at a conceptual level, the AoU entries needed for a lockstep CPU core regarding external voltage and clock monitoring responsibilities.",
+    "minutes": 11,
+    "answer": [
+      "State that the integrator must provide independent voltage and clock monitoring outside the core itself, since the core's internal lockstep mechanism alone cannot detect certain shared-supply or shared-clock faults.",
+      "Specify the required monitoring's detection latency and reaction expectations precisely enough that an integrator's design can be checked against the AoU, not just described qualitatively."
+    ],
+    "probes": [
+      "What would make this AoU entry too vague for an integrator to actually verify compliance against?"
+    ],
+    "refs": [
+      "ISO 26262-9:2018 dependent failure analysis"
+    ]
+  },
+  {
+    "id": "S08-05",
+    "day": 8,
+    "tier": "Advanced",
+    "kind": "Analysis",
+    "tracks": [
+      "SEooC & Safety Manuals"
+    ],
+    "question": "A customer integrates your SEooC IP in a way that technically satisfies your AoU on paper but violates its intent. How do you handle this pre- and post-integration?",
+    "minutes": 11,
+    "answer": [
+      "Pre-integration, review the customer's design against the AoU's intent, not just its literal wording, during any integration support engagement.",
+      "Post-integration, treat a discovered intent violation as seriously as a literal violation, and work with the customer to close the gap rather than relying on the literal AoU wording as a liability shield."
+    ],
+    "probes": [
+      "What would make you decide the AoU wording itself needs revising, rather than just this one customer's interpretation?"
+    ],
+    "refs": [
+      "ISO 26262-10:2018"
+    ]
+  },
+  {
+    "id": "S08-06",
+    "day": 8,
+    "tier": "Advanced",
+    "kind": "Analysis",
+    "tracks": [
+      "SEooC & Safety Manuals"
+    ],
+    "question": "How do you keep a safety manual synchronized across multiple SoC-level customers who each configure the IP differently?",
+    "minutes": 10,
+    "answer": [
+      "Structure the safety manual around configuration-dependent sections so each customer's applicable content is clearly identified rather than buried in a one-size-fits-all document.",
+      "Maintain a controlled change process so a metric or AoU update propagates to every affected customer's applicable configuration, not just the one that triggered the update."
+    ],
+    "probes": [
+      "What would go wrong if two customers' configurations silently diverged in the safety manual without either being told?"
+    ],
+    "refs": [
+      "ISO 26262-8:2018 configuration management"
+    ]
+  },
+  {
+    "id": "S08-07",
+    "day": 8,
+    "tier": "Advanced",
+    "kind": "Technical management",
+    "tracks": [
+      "SEooC & Safety Manuals",
+      "Role Scenarios"
+    ],
+    "question": "You must decide, as a product/technical lead, which ASIL level to develop a new SEooC IP against before any customer is signed. How do you decide, and what's the cost of guessing wrong?",
+    "minutes": 12,
+    "answer": [
+      "Base the decision on target-market analysis (which safety-critical applications the IP is realistically aimed at) rather than defaulting to the highest ASIL to be safe.",
+      "Guessing too low forecloses the highest-value safety-critical customers later; guessing too high spends unnecessary rigor and cost on every unit shipped, including non-safety-critical uses."
+    ],
+    "probes": [
+      "What market signal would make you revise the assumed ASIL mid-development rather than waiting until a customer forces the issue?"
+    ],
+    "refs": [
+      "ISO 26262-11:2018"
+    ]
+  },
+  {
+    "id": "S08-08",
+    "day": 8,
+    "tier": "Advanced",
+    "kind": "Certification scenario",
+    "tracks": [
+      "SEooC & Safety Manuals",
+      "Role Scenarios"
+    ],
+    "question": "An assessor challenges whether your Assumptions of Use are specific and falsifiable enough to be usable evidence, or just boilerplate. How do you respond?",
+    "minutes": 11,
+    "answer": [
+      "Walk through a specific AoU entry and show exactly how an integrator's design review would check compliance against it \u2014 demonstrating it is checkable, not just asserted.",
+      "Where an AoU genuinely is too vague to check, treat the finding as valid and revise it rather than defending the existing wording."
+    ],
+    "probes": [
+      "What test would you personally apply to every AoU entry to catch boilerplate before an assessor does?"
+    ],
+    "refs": [
+      "ISO 26262-11:2018"
+    ]
+  },
+  {
+    "id": "S08-09",
+    "day": 8,
+    "tier": "Advanced",
+    "kind": "Customer integration scenario",
+    "tracks": [
+      "SEooC & Safety Manuals",
+      "Role Scenarios"
+    ],
+    "question": "A customer's integration review finds their design violates three of your AoU entries. Walk through how you jointly resolve this.",
+    "minutes": 11,
+    "answer": [
+      "Prioritize the three violations by safety impact, then work through each with the customer to determine whether their design changes or the AoU itself needs revisiting.",
+      "Document the resolution for each violation explicitly, since an unresolved or informally-waived AoU violation undermines the whole safety manual's credibility."
+    ],
+    "probes": [
+      "What would you do if resolving one violation required a design change the customer's schedule couldn't accommodate?"
+    ],
+    "refs": [
+      "ISO 26262-10:2018"
+    ]
+  },
+  {
+    "id": "S08-10",
+    "day": 8,
+    "tier": "Expert",
+    "kind": "Engineering lead scenario",
+    "tracks": [
+      "SEooC & Safety Manuals",
+      "Role Scenarios"
+    ],
+    "question": "How do you lead the organizational shift from \u201cwe build good chips\u201d to \u201cwe build chips with a defensible safety argument attached,\u201d including the cultural resistance you'd expect?",
+    "minutes": 14,
+    "answer": [
+      "Expect resistance framed as safety work slowing down \u201creal\u201d engineering, and counter it by showing safety evidence as a product differentiator customers actually pay for, not overhead.",
+      "Start with a small number of visible, successful safety-manual deliveries to build internal credibility before pushing the discipline organization-wide."
+    ],
+    "probes": [
+      "What early failure would set this cultural shift back the most, and how would you specifically avoid it?"
+    ],
+    "refs": [
+      "ISO 26262-2:2018 safety management"
+    ]
+  },
+  {
+    "id": "S09-01",
+    "day": 9,
+    "tier": "Foundation",
+    "kind": "Concept",
+    "tracks": [
+      "Standards Landscape"
+    ],
+    "question": "How does ISO 26262 relate to IEC 61508 historically and structurally, and what does that inheritance mean practically for a semiconductor safety engineer?",
+    "minutes": 6,
+    "answer": [
+      "ISO 26262 is the automotive derivative of IEC 61508, the base functional-safety standard across industries; core lifecycle and integrity-level concepts carry over structurally.",
+      "Practically, a component developed to IEC 61508 for an industrial context is not automatically qualified for automotive reuse \u2014 ISO 26262-11 requires re-analysis of the differences."
+    ],
+    "probes": [
+      "What automotive-specific concept exists in ISO 26262 that has no direct IEC 61508 equivalent?"
+    ],
+    "refs": [
+      "IEC 61508:2010",
+      "ISO 26262-11:2018"
+    ]
+  },
+  {
+    "id": "S09-02",
+    "day": 9,
+    "tier": "Foundation",
+    "kind": "Concept",
+    "tracks": [
+      "Standards Landscape"
+    ],
+    "question": "What is a TARA under ISO/SAE 21434, and how does it differ in purpose from a HARA under ISO 26262?",
+    "minutes": 7,
+    "answer": [
+      "A TARA identifies cybersecurity threats and assesses their risk; a HARA identifies hazards from malfunctioning behavior and assesses their risk \u2014 both feed requirements back into the design.",
+      "A HARA asks what happens if the system fails; a TARA asks what happens if the system is deliberately attacked \u2014 different failure origins, similar structural role."
+    ],
+    "probes": [
+      "Could a single mechanism need both a HARA-derived and a TARA-derived requirement that pull in opposite design directions?"
+    ],
+    "refs": [
+      "ISO/SAE 21434:2021"
+    ]
+  },
+  {
+    "id": "S09-03",
+    "day": 9,
+    "tier": "Intermediate",
+    "kind": "Analysis",
+    "tracks": [
+      "Standards Landscape"
+    ],
+    "question": "Where do functional safety and cybersecurity requirements conflict or reinforce each other on a semiconductor IP block such as a hardware root of trust?",
+    "minutes": 9,
+    "answer": [
+      "A secure-boot mechanism can be relied upon both to keep malicious firmware out (a cybersecurity concern) and to ensure only safety-validated firmware runs (a safety concern) \u2014 reinforcing in intent.",
+      "But a change optimizing one property (e.g., faster boot for a safety-relevant startup budget) can weaken the other (less rigorous cryptographic verification) \u2014 conflicting in implementation."
+    ],
+    "probes": [
+      "What other semiconductor mechanism, besides secure boot, typically sits at this same safety/security seam?"
+    ],
+    "refs": [
+      "ISO/SAE 21434:2021",
+      "ISO 26262-11:2018"
+    ]
+  },
+  {
+    "id": "S09-04",
+    "day": 9,
+    "tier": "Advanced",
+    "kind": "Analysis",
+    "tracks": [
+      "Standards Landscape"
+    ],
+    "question": "A secure-boot mechanism is relied upon both as a safety mechanism and a security mechanism. What joint FuSa/cybersecurity analysis does this dependency require?",
+    "minutes": 11,
+    "answer": [
+      "A joint review of any proposed change to the mechanism, evaluating impact on both the safety property (only validated firmware runs) and the security property (no malicious firmware runs) together.",
+      "Neither team should be able to unilaterally approve a change to a shared mechanism without the other's sign-off, given the demonstrated potential for one property to be traded against the other."
+    ],
+    "probes": [
+      "What governance structure would you put in place to force this joint review rather than relying on goodwill?"
+    ],
+    "refs": [
+      "ISO/SAE 21434:2021",
+      "ISO 26262-11:2018"
+    ]
+  },
+  {
+    "id": "S09-05",
+    "day": 9,
+    "tier": "Advanced",
+    "kind": "Analysis",
+    "tracks": [
+      "Standards Landscape"
+    ],
+    "question": "Explain how ASPICE's hardware engineering (HWE) process group maps onto a chip design flow, and where it overlaps with or differs from ISO 26262 hardware development.",
+    "minutes": 10,
+    "answer": [
+      "ASPICE HWE assesses whether the organization's hardware development process itself is capable and consistently applied \u2014 a process-capability question, distinct from whether any single product's safety case is technically sound.",
+      "The two overlap in requiring traceable requirements, verification and configuration management, but ASPICE evaluates process maturity across projects while ISO 26262 evaluates one product's safety adequacy."
+    ],
+    "probes": [
+      "Could an organization pass an ASPICE HWE assessment while still having a technically inadequate safety case for a specific product?"
+    ],
+    "refs": [
+      "ISO 26262-8:2018",
+      "Automotive SPICE PAM"
+    ]
+  },
+  {
+    "id": "S09-06",
+    "day": 9,
+    "tier": "Advanced",
+    "kind": "Analysis",
+    "tracks": [
+      "Standards Landscape"
+    ],
+    "question": "A component is developed to IEC 61508 for an industrial application and later proposed for automotive reuse. What re-analysis does ISO 26262-11 require?",
+    "minutes": 10,
+    "answer": [
+      "Re-analysis of the systematic capability, hardware architectural metrics and Assumptions of Use against automotive-specific requirements the original industrial development did not target.",
+      "The original IEC 61508 evidence is a useful starting point, not a substitute for this re-analysis \u2014 the automotive context introduces different mission profiles and failure-consequence assumptions."
+    ],
+    "probes": [
+      "What automotive-specific assumption would the original industrial development most likely have gotten wrong for this reuse?"
+    ],
+    "refs": [
+      "ISO 26262-11:2018",
+      "IEC 61508:2010"
+    ]
+  },
+  {
+    "id": "S09-07",
+    "day": 9,
+    "tier": "Advanced",
+    "kind": "Technical management",
+    "tracks": [
+      "Standards Landscape",
+      "Role Scenarios"
+    ],
+    "question": "Functional safety and cybersecurity teams both claim ownership of the same hardware root-of-trust review. How do you resolve the organizational overlap?",
+    "minutes": 12,
+    "answer": [
+      "Define a joint review process with explicit shared ownership for mechanisms at the identified safety/security seam, rather than assigning the whole mechanism to one team.",
+      "Escalate to a decision only when the two teams' requirements genuinely conflict and cannot both be satisfied, not for every instance of shared interest."
+    ],
+    "probes": [
+      "What would you do if the two teams' review processes had fundamentally incompatible cadences or terminology?"
+    ],
+    "refs": [
+      "ISO 26262-2:2018 safety management"
+    ]
+  },
+  {
+    "id": "S09-08",
+    "day": 9,
+    "tier": "Advanced",
+    "kind": "Certification scenario",
+    "tracks": [
+      "Standards Landscape",
+      "Role Scenarios"
+    ],
+    "question": "An assessor asks how your development process demonstrates ASPICE HWE capability alongside ISO 26262 compliance. What evidence bridges both?",
+    "minutes": 11,
+    "answer": [
+      "Process evidence (defined HWE process, consistently applied, with maturity-level indicators) alongside product evidence (the specific safety case's technical completeness) shown as complementary, not redundant.",
+      "A clear explanation of how the two assessments' scopes differ, so the assessor doesn't mistake one for a substitute for the other."
+    ],
+    "probes": [
+      "What would you do if the two assessments produced contradictory conclusions about the same underlying process?"
+    ],
+    "refs": [
+      "Automotive SPICE PAM",
+      "ISO 26262-8:2018"
+    ]
+  },
+  {
+    "id": "S09-09",
+    "day": 9,
+    "tier": "Advanced",
+    "kind": "Customer integration scenario",
+    "tracks": [
+      "Standards Landscape",
+      "Role Scenarios"
+    ],
+    "question": "A customer needs both a 26262 safety case and a 21434 cybersecurity case for the same IP block, on different timelines. How do you sequence support for both?",
+    "minutes": 11,
+    "answer": [
+      "Identify which evidence and mechanisms are shared between the two cases, and deliver shared foundational evidence first regardless of which case's deadline is nearer.",
+      "Sequence the remaining case-specific work against each timeline independently once the shared foundation is in place, rather than treating the two cases as fully separate engagements."
+    ],
+    "probes": [
+      "What shared evidence, if delivered late, would delay both cases rather than just one?"
+    ],
+    "refs": [
+      "ISO/SAE 21434:2021",
+      "ISO 26262-11:2018"
+    ]
+  },
+  {
+    "id": "S09-10",
+    "day": 9,
+    "tier": "Expert",
+    "kind": "Engineering lead scenario",
+    "tracks": [
+      "Standards Landscape",
+      "Role Scenarios"
+    ],
+    "question": "As a technical leader, how do you build one team's competence across functional safety, cybersecurity and process standards without diluting depth in any of them?",
+    "minutes": 13,
+    "answer": [
+      "Build a shared foundational competence across the whole team while still maintaining named deep specialists in each discipline who anchor the harder decisions.",
+      "Use the seams between disciplines (like the secure-boot example) as deliberate joint-training opportunities, since they teach the interaction that pure single-discipline training misses."
+    ],
+    "probes": [
+      "How would you tell whether the team was developing genuine cross-disciplinary judgment versus just surface-level familiarity with each other's vocabulary?"
+    ],
+    "refs": [
+      "ISO 26262-2:2018 safety management"
+    ]
+  },
+  {
+    "id": "S10-01",
+    "day": 10,
+    "tier": "Foundation",
+    "kind": "Concept",
+    "tracks": [
+      "Certification & Leadership"
+    ],
+    "question": "What is the practical difference between a confirmation review, a functional safety audit and a functional safety assessment, applied to a semiconductor IP program?",
+    "minutes": 6,
+    "answer": [
+      "A confirmation review checks a specific work product against its defined criteria; an audit examines whether the defined process is actually being followed.",
+      "An assessment evaluates whether the achieved functional safety of the element is adequate overall \u2014 a judgment call weighing evidence across RTL, verification, DFT and physical-design teams together."
+    ],
+    "probes": [
+      "Which of the three would catch a well-followed process that still produces an inadequate safety outcome?"
+    ],
+    "refs": [
+      "ISO 26262-2:2018 safety management"
+    ]
+  },
+  {
+    "id": "S10-02",
+    "day": 10,
+    "tier": "Foundation",
+    "kind": "Concept",
+    "tracks": [
+      "Certification & Leadership"
+    ],
+    "question": "What documents make up a minimal, defensible safety case package for a semiconductor IP block being released to customers?",
+    "minutes": 7,
+    "answer": [
+      "The safety plan, the FMEDA and derived metrics, safety-relevant verification and fault-injection evidence, and the safety manual with its Assumptions of Use.",
+      "A traceable link from assumed safety requirements down through implementation and verification evidence, connecting all of the above into one navigable chain."
+    ],
+    "probes": [
+      "Which single document, if missing, would make the rest of the package effectively unusable to an integrator?"
+    ],
+    "refs": [
+      "ISO 26262-11:2018"
+    ]
+  },
+  {
+    "id": "S10-03",
+    "day": 10,
+    "tier": "Intermediate",
+    "kind": "Analysis",
+    "tracks": [
+      "Certification & Leadership"
+    ],
+    "question": "How do you prepare a cross-functional team spanning RTL, verification, DFT and physical design for an external functional safety assessment?",
+    "minutes": 9,
+    "answer": [
+      "Consolidate each team's evidence into one traceable, navigable package before the assessment, rather than expecting the assessor to gather it from scattered sources.",
+      "Rehearse how each team would explain their evidence to someone outside their discipline, since the assessor will not share their specialized vocabulary."
+    ],
+    "probes": [
+      "What team-specific gap would you specifically look for that the team itself might not recognize as a gap?"
+    ],
+    "refs": [
+      "ISO 26262-2:2018 safety management"
+    ]
+  },
+  {
+    "id": "S10-04",
+    "day": 10,
+    "tier": "Advanced",
+    "kind": "Analysis",
+    "tracks": [
+      "Certification & Leadership"
+    ],
+    "question": "An assessor finds your safety case is technically complete but the underlying evidence is scattered across disconnected tools and repositories. How significant is this finding, and how do you respond?",
+    "minutes": 11,
+    "answer": [
+      "Treat it as a real, significant finding \u2014 evidence a reviewer or future engineer cannot navigate is not usable evidence, regardless of its technical content.",
+      "Respond by consolidating and cross-referencing the existing evidence into one traceable package, rather than arguing the finding is merely administrative."
+    ],
+    "probes": [
+      "What would make this finding a \u2018major nonconformity\u2019 rather than a \u2018minor observation\u2019 in your judgment?"
+    ],
+    "refs": [
+      "ISO 26262-2:2018 safety management"
+    ]
+  },
+  {
+    "id": "S10-05",
+    "day": 10,
+    "tier": "Advanced",
+    "kind": "Analysis",
+    "tracks": [
+      "Certification & Leadership"
+    ],
+    "question": "You join a semiconductor IP program six months from tapeout with no credible functional safety plan in place. What do you do first?",
+    "minutes": 12,
+    "answer": [
+      "Consolidate whatever safety-relevant evidence already exists into a traceable baseline before starting new analyses, so genuine gaps are visible against real ground truth.",
+      "Only after that baseline exists, prioritize closing the highest-risk gaps against the fixed tapeout date, rather than attempting a from-scratch, fully rigorous plan the schedule cannot support."
+    ],
+    "probes": [
+      "What would you escalate immediately versus quietly work around given the fixed timeline?"
+    ],
+    "refs": [
+      "ISO 26262-2:2018 safety management"
+    ]
+  },
+  {
+    "id": "S10-06",
+    "day": 10,
+    "tier": "Advanced",
+    "kind": "Design",
+    "tracks": [
+      "Certification & Leadership"
+    ],
+    "question": "Present, at a high level, the safety-case argument for \u201cno undetected fault in this IP block causes a violation of the customer's allocated safety requirement.\u201d",
+    "minutes": 12,
+    "answer": [
+      "Argue from the FMEDA's fault classification and diagnostic coverage: every fault class either cannot violate the requirement, or is detected and reacted to within the required time, within the stated Assumptions of Use.",
+      "Explicitly state the AoU and metric assumptions the argument depends on, since the argument's validity is conditional on the integrator satisfying them."
+    ],
+    "probes": [
+      "What part of this argument would an assessor most likely probe first for weakness?"
+    ],
+    "refs": [
+      "ISO 26262-11:2018"
+    ]
+  },
+  {
+    "id": "S10-07",
+    "day": 10,
+    "tier": "Advanced",
+    "kind": "Technical management",
+    "tracks": [
+      "Certification & Leadership",
+      "Role Scenarios"
+    ],
+    "question": "A customer's assessment finding blocks their start-of-production unless you deliver additional evidence in four weeks. How do you triage and resource this without abandoning other customer commitments?",
+    "minutes": 13,
+    "answer": [
+      "Assess whether the finding requires new analysis or just better presentation of existing evidence, since the two require very different resourcing.",
+      "Temporarily reallocate toward this commitment based on its business and safety criticality, while explicitly communicating the trade-off to other affected customers rather than silently deprioritizing them."
+    ],
+    "probes": [
+      "What would you do if the four-week deadline was simply not achievable no matter how you resourced it?"
+    ],
+    "refs": [
+      "ISO 26262-2:2018 safety management"
+    ]
+  },
+  {
+    "id": "S10-08",
+    "day": 10,
+    "tier": "Advanced",
+    "kind": "Certification scenario",
+    "tracks": [
+      "Certification & Leadership",
+      "Role Scenarios"
+    ],
+    "question": "Your own internal assessment and an external assessor disagree on whether a finding is a minor observation or a major nonconformity. How do you handle the disagreement?",
+    "minutes": 12,
+    "answer": [
+      "Compare the specific safety impact each side is weighing, since the disagreement usually traces to a difference in how each interprets the finding's downstream consequence.",
+      "Default to treating it as the more serious classification while the disagreement is resolved, rather than proceeding as if the milder classification were already settled."
+    ],
+    "probes": [
+      "What evidence would actually resolve this disagreement rather than just restating each side's position?"
+    ],
+    "refs": [
+      "ISO 26262-2:2018 safety management"
+    ]
+  },
+  {
+    "id": "S10-09",
+    "day": 10,
+    "tier": "Advanced",
+    "kind": "Customer integration scenario",
+    "tracks": [
+      "Certification & Leadership",
+      "Role Scenarios"
+    ],
+    "question": "You must explain to a mixed audience of a customer's control engineers, safety engineers and program managers why your IP's residual risk is acceptable for their vehicle-level safety goal. How do you tailor that explanation to each audience?",
+    "minutes": 12,
+    "answer": [
+      "For control engineers, explain what the mechanism actually does under fault conditions; for safety engineers, the metric derivation and assumptions; for program managers, the residual risk and schedule exposure.",
+      "Keep the underlying argument identical across all three explanations \u2014 only the level of technical detail and framing changes, not the substance of the claim."
+    ],
+    "probes": [
+      "What would you do if one audience's question revealed the other two had been given subtly inconsistent explanations?"
+    ],
+    "refs": [
+      "ISO 26262-11:2018"
+    ]
+  },
+  {
+    "id": "S10-10",
+    "day": 10,
+    "tier": "Expert",
+    "kind": "Engineering lead scenario",
+    "tracks": [
+      "Certification & Leadership",
+      "Role Scenarios"
+    ],
+    "question": "Capstone: design the end-to-end functional safety approach \u2014 item/element boundary through RTL, verification, hardware metrics, safety manual and certification support \u2014 for a new safety-critical CPU/lockstep IP core intended for multiple automotive customers.",
+    "minutes": 18,
+    "answer": [
+      "Start from the element boundary and assumed ASIL/AoU, then sequence RTL and verification (including explicit safety-mechanism verification), fault-injection-substantiated FMEDA and metrics, and a safety manual designed for reuse across multiple customer configurations.",
+      "Build in pre-tapeout review gates protected from schedule compression, and a certification-support plan that keeps evidence traceable and consolidated from the start rather than assembled retroactively before each customer's assessment."
+    ],
+    "probes": [
+      "Which single decision, made incorrectly at the very start of this program, would be most expensive to correct later?"
+    ],
+    "refs": [
+      "ISO 26262-11:2018",
+      "ISO 26262-2:2018 safety management"
+    ]
+  }
+]
